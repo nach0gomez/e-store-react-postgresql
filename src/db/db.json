@@ -1,0 +1,18 @@
+{
+    "categorias": [
+        { "id": 1, "title": "Neveras"},
+        { "id": 2, "title": "Teteras"},
+        { "id": 3, "title": "Televisores"}
+    ],
+    "productos": [
+        { "id": 1, "catId": 1, "title": "Nevera Blanca con Congelador"},
+        { "id": 2, "catId": 1, "title": "Nevera Blanca sin Congelador"},
+        { "id": 3, "catId": 1, "title": "Nevera Negra con Congelador"},
+        { "id": 4, "catId": 1, "title": "Nevera Negra sin Congelador"},
+        { "id": 5, "catId": 2, "title": "Tetera Blanca"},
+        { "id": 6, "catId": 2, "title": "Tetera Negra"},
+        { "id": 7, "catId": 3, "title": "Televisor 32 pulgadas"},
+        { "id": 8, "catId": 3, "title": "Televisor 42 pulgadas"},
+        { "id": 9, "catId": 3, "title": "Televisor 50 pulgadas"}
+    ]
+}
