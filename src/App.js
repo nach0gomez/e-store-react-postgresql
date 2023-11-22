@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
-import Category from './components/Category';
-import { getCategories, getProducts } from './fetcher';
+import Category from './components/category';
+import CategoryProduct from './components/category_product';
+import { getCategories, getProducts, getAllProducts } from './fetcher';
 
 function App() {
   // create an array to store the data from the json request
@@ -14,6 +15,10 @@ function App() {
     const fetchData = async () => {
       const responseObject = await getCategories();
       setCategories(responseObject);
+
+      //get all the products to be loaded in the app with no category selected
+      const responseObjectProduct = await getAllProducts();
+      setProducts(responseObjectProduct);
     }
     fetchData();
   }, [])
@@ -36,10 +41,9 @@ function App() {
 
   //render the products when a category is clicked, depending on the catId
   const renderProducts = () => {
-    return products.data.map( c => 
+    return products.data.map( p => 
       //<Product key={c.id} id={c.id} title={c.id}/>
-      <div>{c.title}</div>
-      )
+      <CategoryProduct {...p}>{p.title}</CategoryProduct>);
   }
 
   return (
@@ -52,11 +56,11 @@ function App() {
         { categories.data && renderCategories() }  
       </nav>
     
-    <article>
+    <main>
       <h1>Productos</h1>
       { products.errorMessage && <div>Error: {products.errorMessage}</div>} 
       { products && renderProducts()}
-    </article>
+    </main>
     </section>
     <footer>
         Todos los derechos reservados
