@@ -1,5 +1,3 @@
-
-
 * {
   box-sizing: border-box;
   padding: 0px;
@@ -10,7 +8,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Style the header */
 header {
   background-color: #666;
   padding: 30px;
@@ -19,14 +16,11 @@ header {
   color: white;
 }
 
-
-/*Cointainer for flexboxes */
-section{
+section {
   display: -webkit-flex;
   display: flex;
 }
 
-/* Style the navigation menu */
 nav {
   -webkit-flex: 0.5;
   -ms-flex: 0.5;
@@ -35,35 +29,18 @@ nav {
   padding: 20px;
 }
  
-/* Style the list inside the menu */
-nav ul {
-    list-style-type: none;
-    padding: 0; 
-}
-
-/* Style the content of the page */
-article {
-  -webkit-flex: 4;
-  flex: 4;
-  -ms-flex: 4;
-  background-color: #f1f1f1;
-  padding: 10px;  
-}
+ nav ul {
+  list-style-type: none;
+  padding: 0;
+  cursor: pointer; 
+ }
  
  nav ul li {
-  display: inline-block;
+  padding-bottom: 5px;
  }
  
- nav ul li a {
-  display: block;
-  padding: 10px 20px;
-  color: #333;
-  text-decoration: none;
- }
- 
- nav ul li a:hover {
-  background-color: #ddd;
-  color: black;
+ nav ul li:hover {
+  color: blue;
  }
  
  /* Main area */
@@ -71,10 +48,104 @@ article {
   padding: 20px;
  }
  
+article {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.25fr 1fr 0.25fr;
+  column-gap: 20px;
+}
+
  /* Footer */
  footer {
-  background-color: #666;
+  background-color: #777;
   color: white;
   text-align: center;
   padding: 10px;
+ }
+
+.category-product-title {
+  grid-column: 1 / span 3;
+  color: darkslategray;
+  font-weight: bold;
+  font-size: 1.5em;
+  padding-left: 10px;
+}
+
+.category-product-image-container {
+  padding: 10px;
+  width: 60%;
+}
+
+.category-product-image-container img{
+  width: 100%;
+  height: 100%;
+}
+
+.category-product-info-header {
+  display: flex;
+}
+
+.category-product-info-finance-price {
+  color: darkslategray;
+  font-size: 2em;
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+.category-product-info-dimensions h3,
+.category-product-info-capacity h3,
+.category-product-info-capacity h3 {
+  color: darkslategray;
+  font-size: 1em;
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.category-product-info-features li {
+  padding-top: 5px;
+}
+
+.category-product-info-stock {
+  padding-left: 10px;
+  margin-top: 20px;
+  padding-top: 10px;
+  background-color: lightgrey;
+  height: 20%;
+  width: 20%;
+  border-radius: 5px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+}
+
+.category-product-info-stock label {
+  padding-bottom: 5px;
+}
+
+ .category-product-action {
+  display: flex;
+  flex-direction: column;
+ }
+
+ .category-product-action button {
+  width: 160px;
+  height: 30px;
+  border-radius: 10px;
+  margin-top: 20px;
+  background-color: lightgray;
+  border: solid 1px slategrey;
+  font-weight: bold;
+}
+
+ .category-product-action button:last-child {
+  background-color: darkgray;
+ }
+
+ /* Responsive layout makes the content stay in top of each other instead of next to them */
+ @media (max-width: 600px) {
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
  }
