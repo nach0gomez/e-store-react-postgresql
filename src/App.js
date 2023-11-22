@@ -1,37 +1,68 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Category from './components/Category';
+import { getCategories, getProducts } from './fetcher';
 
 function App() {
   // create an array to store the data from the json request
-  const [resultados, setResultados] = useState([]); 
+  const [categories, setCategories] = useState({errorMessage: "", data: []}); 
+  const [products, setProducts] = useState({errorMessage: "", data: []}); 
 
-  console.log('Renderizando App'); // Agrega esta línea
 
   // we make sure it is called once the page is mounted 
   React.useEffect(() => {
-    //console.log("Ejecuntando useEffect")
-    fetch('http://localhost:3001/categorias')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        //console.log("Datos recibidos")
-        setResultados(data);
-      });
+    const fetchData = async () => {
+      const responseObject = await getCategories();
+      setCategories(responseObject);
+    }
+    fetchData();
   }, [])
 
+  // create the event when a category is clicked
+  const handleCategoryClick = id => {
+    const fetchData = async () => {
+      const responseObject = await getProducts(id);
+      setProducts(responseObject);
+    }
+    fetchData();
+  }
   
+  //render the categories, this is done when the page loads for first time
+  const renderCategories = () => {
+    return categories.data.map( c => 
+        <Category key={c.id} id={c.id} title={c.title} onCategoryClick={() => handleCategoryClick(c.id)}/>
+      );
+  }
 
+  //render the products when a category is clicked, depending on the catId
+  const renderProducts = () => {
+    return products.data.map( c => 
+      //<Product key={c.id} id={c.id} title={c.id}/>
+      <div>{c.title}</div>
+      )
+  }
 
   return (
-    <div className="App">
-      {
-        resultados.map( d => (
-          <div key={d.id}> {d.title} </div>
-        ))
-      }      
-    </div>
-  );
+    <>
+    <header>Mercado Gris</header>
+
+    <section>
+      <nav>
+        { categories.errorMessage && <div>Error: {categories.errorMessage}</div>}
+        { categories.data && renderCategories() }  
+      </nav>
+    
+    <article>
+      <h1>Productos</h1>
+      { products.errorMessage && <div>Error: {products.errorMessage}</div>} 
+      { products && renderProducts()}
+    </article>
+    </section>
+    <footer>
+        Todos los derechos reservados
+    </footer>
+    </>
+    );
 }
 
 export default App;
