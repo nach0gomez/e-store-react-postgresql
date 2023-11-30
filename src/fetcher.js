@@ -21,17 +21,33 @@ const fetcher = async (url) => {
         return responseObject;
     }
 
-}
+};
 
 // make a reference to the request from the fetcher for each request to make it general
 export const getCategories = () => {
     return fetcher("/categorias");
-}
+};
 
 export const getAllProducts = () => {
     return fetcher("/productos")
-}
+};
 
 export const getProducts = id => {
     return fetcher("/productos?catId="+id);
-}
+};
+
+export const getProductsById = async (id) => {
+    try {
+        const response = await fetcher('/productos/' + id);
+    
+        //ensure the image path so it gets it correctly when calling data.image
+        if (!response.errorMessage) {
+          // Log the original and updated image paths
+          response.data.image = `./assets/${response.data.image}`;
+          }
+    
+        return response;
+      } catch (error) {
+        return { errorMessage: 'Error fetching product details.' };
+      }
+};

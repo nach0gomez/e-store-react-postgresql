@@ -1,10 +1,16 @@
 import React from 'react'
+//link to navigate to an specific id depending on the element
+// useNavigate to force the navigation when loading info from an specific element
+import { Link, useNavigate } from 'react-router-dom'
 
-const CategoryProduct = ({title, image, specs, features, price, stock}) => {
+const CategoryProduct = ({id, title, image, specs, features, price, stock}) => {
+
+  const navigate = useNavigate();
+
   return (
     <article>
         <div className='category-product-title'>
-            {title}
+            <Link to={`products/${id}`}> {title} </Link>
         </div>
 
         <figure>
@@ -13,11 +19,14 @@ const CategoryProduct = ({title, image, specs, features, price, stock}) => {
             </div>
         </figure>
         <aside>
-            <div className='category-product-info-dimensions'>
+
+            {specs.dimensions && (
+                <div className='category-product-info-dimensions'>
                 <h3>Dimensiones</h3>
                 <label>{specs.dimensions}</label>
             </div>
-
+            )}
+            
             {/* If the element has capacity on specs, it renders the capacity, if not, just passes 
             if capacity loads any data (returns true), then it renders the div*/}
             {specs.capacity && (
@@ -30,8 +39,8 @@ const CategoryProduct = ({title, image, specs, features, price, stock}) => {
             <div className='category-product-info-features'>
                 <h3>Características</h3>
                 <ul>
-                    {features?.map( (f) => {
-                        return <li>{f}</li>
+                    {features?.map( (f, i) => {
+                        return <li key={`feature${i}`}>{f}</li>
                     })}
                 </ul>
             </div>   
@@ -48,7 +57,7 @@ const CategoryProduct = ({title, image, specs, features, price, stock}) => {
             </div>
 
             <div className='category-product-action'>
-                <button>Ver Producto</button>
+                <button onClick={() => navigate(`products/${id}`)}>Ver Producto</button>
                 <button>Añadir a Carrito</button>
             </div>
         </aside>

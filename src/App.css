@@ -47,6 +47,11 @@ nav {
  main {
   padding: 20px;
  }
+
+ main h1 {
+    padding-bottom: 20px;
+    padding-left: 10px;
+ }
  
 article {
   display: grid;
@@ -85,15 +90,15 @@ article {
   display: flex;
 }
 
-.category-product-info-finance-price {
+.category-product-finance-price {
   color: darkslategray;
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bold;
   padding-top: 10px;
 }
 
 .category-product-info-dimensions h3,
-.category-product-info-capacity h3,
+.category-product-info-features h3,
 .category-product-info-capacity h3 {
   color: darkslategray;
   font-size: 1em;
