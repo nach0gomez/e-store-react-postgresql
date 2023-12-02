@@ -68,7 +68,11 @@ article {
   padding: 10px;
  }
 
-.category-product-title {
+ /*
+
+*/
+
+ .category-product-title {
   grid-column: 1 / span 3;
   color: darkslategray;
   font-weight: bold;

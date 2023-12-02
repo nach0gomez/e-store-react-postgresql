@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
-import Category from './components/category';
 import CategoryProduct from './components/categoryProduct';
 import { getCategories, getProducts, getAllProducts } from './fetcher';
+import { Link } from 'react-router-dom';
+
 
 function App() {
   // create an array to store the data from the json request
@@ -35,16 +36,11 @@ function App() {
   //render the categories, this is done when the page loads for first time
   const renderCategories = () => {
     return categories.data.map( c => 
-        <Category key={c.id} id={c.id} title={c.title} onCategoryClick={() => handleCategoryClick(c.id)}/>
+      <li key={c.id}> <Link to={`/categories/${c.id}`}> {c.title}  </Link> </li>
       );
   }
 
-  //render the products when a category is clicked, depending on the catId
-  const renderProducts = () => {
-    return products.data.map( p => 
-      //<Product key={c.id} id={c.id} title={c.id}/>
-      <CategoryProduct key={p.id} {...p}>{p.title}</CategoryProduct>);
-  }
+  
 
   return (
     <>
@@ -53,13 +49,13 @@ function App() {
     <section>
       <nav>
         { categories.errorMessage && <div>Error: {categories.errorMessage}</div>}
-        { categories.data && renderCategories() }  
-      </nav>
+        <ul>
+        { categories.data && renderCategories() }    
+        </ul>
+        </nav>
     
     <main>
-      <h1>Productos</h1>
-      { products.errorMessage && <div>Error: {products.errorMessage}</div>} 
-      { products && renderProducts()}
+      
     </main>
     </section>
     <footer>

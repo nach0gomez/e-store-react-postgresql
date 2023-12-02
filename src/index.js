@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import ProductDetail from './components/productDetail';
 import Cart from './components/cart';
 import Checkout from './components/checkout';
+import Category from './components/category';
 
 import {
   BrowserRouter,
@@ -22,11 +23,13 @@ root.render(
       <Route path='cart' element={<Cart />}/>
       <Route path='checkout' element={<Checkout />}/>
       <Route path='products/:productId' element={<ProductDetail />}/>
+      <Route path='categories/:categoryId' element={<Category />}/>
     </Routes>
       
     </BrowserRouter>
     </React.StrictMode>,
-    document.getElementById('root')
+    //remove the argument sent twice to the render
+    //document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

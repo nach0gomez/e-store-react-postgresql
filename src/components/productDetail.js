@@ -1,6 +1,7 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import { getProductsById } from '../fetcher';
+import '../styles/productDetail.css';
 
 const ProductDetail = () => {
 
@@ -15,12 +16,12 @@ const ProductDetail = () => {
       const responseObject = await getProductsById(productId);
   
       // Log the original and updated image paths
-      console.log('Before setting state - Original image path:', responseObject.data.image);
+      //console.log('Before setting state - Original image path:', responseObject.data.image);
   
       setProduct(responseObject);
   
       // Log the image path after setting state
-      console.log('After setting state - Updated image path:', responseObject.data.image);
+      //console.log('After setting state - Updated image path:', responseObject.data.image);
     };
   
     fetchData();
@@ -83,6 +84,7 @@ const ProductDetail = () => {
                 <button>Añadir a Carrito</button>
             </div>
         </aside>
+        <div className='product-info-description'>{product.data?.description}</div>
     </article>
   )
 }

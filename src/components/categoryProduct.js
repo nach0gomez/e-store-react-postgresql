@@ -1,7 +1,11 @@
 import React from 'react'
+
+
+
 //link to navigate to an specific id depending on the element
 // useNavigate to force the navigation when loading info from an specific element
 import { Link, useNavigate } from 'react-router-dom'
+
 
 const CategoryProduct = ({id, title, image, specs, features, price, stock}) => {
 
@@ -15,7 +19,7 @@ const CategoryProduct = ({id, title, image, specs, features, price, stock}) => {
 
         <figure>
             <div className='category-product-image-container'>
-                <img src={`./assets/${image}`} alt={title} />
+                <img src={`/assets/${image}`} alt={title} />
             </div>
         </figure>
         <aside>
