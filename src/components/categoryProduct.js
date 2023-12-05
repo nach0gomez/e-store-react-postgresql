@@ -1,15 +1,18 @@
-import React from 'react'
-
-
-
+import React, { useContext } from 'react';
 //link to navigate to an specific id depending on the element
 // useNavigate to force the navigation when loading info from an specific element
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
+import '../App.css';
+import { CartContext } from '../contexts/cartContext';
+
 
 
 const CategoryProduct = ({id, title, image, specs, features, price, stock}) => {
 
   const navigate = useNavigate();
+  const cartContext = useContext(CartContext);
+  const { addProduct } = cartContext;
+
 
   return (
     <article>
@@ -62,7 +65,7 @@ const CategoryProduct = ({id, title, image, specs, features, price, stock}) => {
 
             <div className='category-product-action'>
                 <button onClick={() => navigate(`products/${id}`)}>Ver Producto</button>
-                <button>Añadir a Carrito</button>
+                <button onClick={() => addProduct({id, title, price})}>Añadir a Carrito</button>
             </div>
         </aside>
     </article>

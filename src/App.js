@@ -1,68 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import CategoryProduct from './components/categoryProduct';
-import { getCategories, getProducts, getAllProducts } from './fetcher';
-import { Link } from 'react-router-dom';
+import { getCategories } from './fetcher';
+import ProductDetail from './components/productDetail';
+import Cart from './components/cart';
+import Checkout from './components/checkout';
+import Category from './components/category';
+import Layout from './components/layout';
+import { Home } from './components/home';
 
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+} from 'react-router-dom';
 
 function App() {
-  // create an array to store the data from the json request
-  const [categories, setCategories] = useState({errorMessage: "", data: []}); 
-  const [products, setProducts] = useState({errorMessage: "", data: []}); 
+  const [categories, setCategories] = useState({ errorMessage: '', data: [], });
 
-
-  // we make sure it is called once the page is mounted 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
-      const responseObject = await getCategories();
-      setCategories(responseObject);
+      const responseObject1 = await getCategories();
+      setCategories(responseObject1);
 
-      //get all the products to be loaded in the app with no category selected
-      const responseObjectProduct = await getAllProducts();
-      setProducts(responseObjectProduct);
-    }
+    };
     fetchData();
-  }, [])
-
-  // create the event when a category is clicked
-  const handleCategoryClick = id => {
-    const fetchData = async () => {
-      const responseObject = await getProducts(id);
-      setProducts(responseObject);
-    }
-    fetchData();
-  }
+  }, [categories]);
   
-  //render the categories, this is done when the page loads for first time
-  const renderCategories = () => {
-    return categories.data.map( c => 
-      <li key={c.id}> <Link to={`/categories/${c.id}`}> {c.title}  </Link> </li>
-      );
-  }
-
-  
-
   return (
-    <>
-    <header>Mercado Gris</header>
-
-    <section>
-      <nav>
-        { categories.errorMessage && <div>Error: {categories.errorMessage}</div>}
-        <ul>
-        { categories.data && renderCategories() }    
-        </ul>
-        </nav>
-    
-    <main>
-      
-    </main>
-    </section>
-    <footer>
-        Todos los derechos reservados
-    </footer>
-    </>
-    );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout categories={categories}  />}>
+          <Route index element={<Home/>} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="categories/:categoryId/products/:productId" element={<ProductDetail />} />
+          <Route path="categories/:categoryId" element={<Category />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
+  

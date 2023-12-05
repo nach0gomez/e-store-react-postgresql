@@ -34,7 +34,7 @@ const ProductDetail = () => {
         </div>
 
         <figure>
-            <div className='category-product-image-container'>
+            <div className='category-product-detail-image-container'>
               {/* make sure to load the images from the public reference to avoid the program to not find the file*/}
                 <img src={`${process.env.PUBLIC_URL}/${product.data.image}`} alt={product.data.title} />
             </div>

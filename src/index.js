@@ -3,31 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ProductDetail from './components/productDetail';
-import Cart from './components/cart';
-import Checkout from './components/checkout';
-import Category from './components/category';
 
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  } from "react-router-dom";
+import  CartContextProvider from './contexts/cartContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path='cart' element={<Cart />}/>
-      <Route path='checkout' element={<Checkout />}/>
-      <Route path='products/:productId' element={<ProductDetail />}/>
-      <Route path='categories/:categoryId' element={<Category />}/>
-    </Routes>
-      
-    </BrowserRouter>
-    </React.StrictMode>,
+    <CartContextProvider>
+      <App/>
+    </CartContextProvider>
+  </React.StrictMode>,
     //remove the argument sent twice to the render
     //document.getElementById('root')
 );
