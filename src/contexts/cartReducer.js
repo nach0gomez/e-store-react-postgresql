@@ -1,45 +1,45 @@
 export const CartReducer = (state, action) => {
+  let index = -1;
 
-    debugger;
+  if (action.payload)
+       index = state.cartItems.findIndex( x => x.id === action.payload.id);
 
-    let index = -1;
+  switch (action.type){
+       case "ADD":
+       case "INCQTY":
 
-    if (action.payload)
-        index = state.cartItems.findIndex( x => x.id === action.payload.id);
+          //console.log('El index aqui es:' + index)
+           if (index === -1){
+               state.cartItems.push({...action.payload, quantity: 1});
+               //console.log("Estoy en el if que agrega cantidad y demas elementos de payload");
+           } else {
+               state.cartItems[index].quantity++;
+               //console.log('Estoy en el else que agrega cantidad ++|')
+           }
+             break;
+           
 
-
-
-    switch (action.type){
-        case "ADD":
-        case "INCQTY":
- 
-            if (index === 1){
-                state.cartItems.push({...action.payload, quantity: 1});
-            } else {
-                state.cartItems[index].quantity++;
-            }
-
-            break;
-            
-        case "REMOVE":
-            if (index > -1) {
-                state.cartItems.splice(index, 1);
-            }
-            break;
+       case "REMOVE":
+           if (index > -1) {
+               state.cartItems.splice(index, 1);
+           }
+           break;
 
 
-        case "DECQTY": 
-            if (index > -1) {
-                state.cartItems[index].quantity--;
-            }
-            break;
+       case "DECQTY": 
+           if (index > -1) {
+               state.cartItems[index].quantity--;
+           }
+           break;
 
-        case "CLEAR":
-            state.cartItems = [];
-            break;
+       case "CLEAR":
+           state.cartItems = [];
+           break;
 
-        default:
-            
+       default:
+           
 
-    }
+   }
+   
+   return state;
 }

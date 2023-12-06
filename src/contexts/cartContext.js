@@ -14,7 +14,6 @@ const CartContextProvider = ({children} ) => {
 
     }
 
-
     const removeProduct = payload => {
         dispatch({ type: 'REMOVE', payload});
     }

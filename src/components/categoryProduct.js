@@ -10,8 +10,7 @@ import { CartContext } from '../contexts/cartContext';
 const CategoryProduct = ({id, title, image, specs, features, price, stock}) => {
 
   const navigate = useNavigate();
-  const cartContext = useContext(CartContext);
-  const { addProduct } = cartContext;
+  const { addProduct } = useContext(CartContext);
 
 
   return (
@@ -65,7 +64,8 @@ const CategoryProduct = ({id, title, image, specs, features, price, stock}) => {
 
             <div className='category-product-action'>
                 <button onClick={() => navigate(`products/${id}`)}>Ver Producto</button>
-                <button onClick={() => addProduct({id, title, price})}>Añadir a Carrito</button>
+                
+                <button onClick={ () => addProduct({id, title, price}) }>Añadir a Carrito</button>
             </div>
         </aside>
     </article>

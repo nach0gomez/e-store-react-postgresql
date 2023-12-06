@@ -24,7 +24,7 @@ function App() {
 
     };
     fetchData();
-  }, [categories]);
+  }, []);
   
   return (
     <BrowserRouter>
