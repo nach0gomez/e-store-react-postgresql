@@ -63,9 +63,8 @@ const CategoryProduct = ({id, title, image, specs, features, price, stock}) => {
             </div>
 
             <div className='category-product-action'>
-                <button onClick={() => navigate(`products/${id}`)}>Ver Producto</button>
-                
-                <button onClick={ () => addProduct({id, title, price}) }>Añadir a Carrito</button>
+                <button className='clickeable' onClick={() => navigate(`products/${id}`)}>Ver Producto</button>
+                <button className='clickeable' onClick={ () => addProduct({id, title, price}) }>Añadir a Carrito</button>
             </div>
         </aside>
     </article>

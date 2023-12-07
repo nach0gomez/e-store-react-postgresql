@@ -4,6 +4,7 @@
     height: 40px;
     width: 90px;
     margin-bottom: 30px;
+    cursor: pointer;
 }
 
 .cart-total  {

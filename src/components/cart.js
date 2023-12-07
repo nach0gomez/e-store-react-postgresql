@@ -1,60 +1,69 @@
-import React, { useContext } from 'react'
-import '../styles/cart.css'
+import React, { useContext, useState } from 'react';
+import '../styles/cart.css';
 import { CartContext } from '../contexts/cartContext';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { PlusIcon, MinusIcon, TrashIcon } from './icons';
 
 const Cart = () => {
-
   const navigate = useNavigate();
-  const { getItems } = useContext(CartContext);
+  const { getItems, clearCart, increaseQuantity, decreaseQuantity, removeProduct } = useContext(CartContext);
+  
+  // Use local state to manage cartItems for automatic updates
+  const [cartItems, setCartItems] = useState(getItems());
+
+  // Function to update the local state and trigger a re-render
+  const updateCartState = () => {
+    setCartItems(getItems());
+  };
 
   const renderCart = () => {
-    const cartItems = getItems();
-
     if (cartItems.length > 0) {
-      return cartItems.map( (p) => (
+      return cartItems.map((p) => (
         <React.Fragment key={p.id}>
           <div>
             <Link to={`/categories/3/products/${p.id}`}>{p.title}</Link>
           </div>
           <div className='cart-qty'>
             {p.quantity}
+            <PlusIcon width={20} onClick={() => { increaseQuantity({ id: p.id }); updateCartState(); }} />
+            <MinusIcon width={20} onClick={() => { decreaseQuantity({ id: p.id }); updateCartState(); }} />
+            <TrashIcon width={20} onClick={() => { removeProduct({ id: p.id }); updateCartState(); }} />
           </div>
-          <div className='cart-price'>
-            {p.price} COP
-          </div>
+          <div className='cart-price'>{p.price} COP</div>
         </React.Fragment>
       ));
     } else {
-      return <div>El carrito esta vacío.</div>
+      return <div>El carrito está vacío.</div>;
     }
-  }
+  };
+
+  const renderTotal = () => {
+    const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    return total;
+  };
 
   return (
     <div className='cart-container'>
       <h2 className='cart-title'>Carrito</h2>
-      <button className='cart-button'>Pagar</button>
+      <button className='cart-button' onClick={() => navigate('/checkout')}>
+        Pagar
+      </button>
       <div className='cart-table'>
         <div className='cart-header'>
           <h4>Artículo</h4>
           <h4>Cantidad</h4>
           <h4>Precio</h4>
         </div>
-        
         <hr className='cart-header-line' />
-
-        <div className='cart-header'>
-          {renderCart()}
-        </div>
+        <div className='cart-header'>{renderCart()}</div>
         <hr className='cart-header-line' />
-
-        <button className='cart-button'>Limpiar</button>
-        <h2 className='cart-total'>Total: 0 COP</h2>
       </div>
-
+      <button className='cart-button' onClick={() => { clearCart(); updateCartState(); }}>
+        Limpiar
+      </button>
+      <h2 className='cart-total'>Total: {renderTotal()} COP</h2>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

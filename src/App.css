@@ -4,6 +4,11 @@
   margin: 0px;
 }
 
+a {
+  color: darkslategray;
+  text-decoration: none;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -13,6 +18,24 @@ header {
   padding: 30px;
   text-align: center;
   font-size: 35px;
+  color: white;
+  display: grid;
+  grid-template-columns: 0.1fr 1fr 0.1fr;
+}
+
+#headerHomeIcon {
+  justify-self: start;
+}
+
+#headerTitle {
+  justify-self: center;
+}
+
+#headerCartIcon {
+  justify-self: end;
+}
+
+header a {
   color: white;
 }
 
@@ -66,11 +89,20 @@ article {
   color: white;
   text-align: center;
   padding: 10px;
+  font-size: 20px;
+ }
+
+ footer a {
+  color: white;
  }
 
  /*
 
 */
+
+ .clickeable {
+  cursor: pointer;
+ }
 
  .category-product-title {
   grid-column: 1 / span 3;
@@ -158,3 +190,36 @@ article {
     flex-direction: column;
   }
  }
+
+ .svg-icon {
+  width: 1em;
+  height: 1em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: white;
+}
+
+.svg-icon circle {
+  stroke: white;
+  stroke-width: 1;
+}
+
+ .svg-icon-black {
+  width: 1.3em;
+  height: 1.3em;
+  cursor: pointer;
+}
+
+.svg-icon-black path,
+.svg-icon-black polygon,
+.svg-icon-black rect {
+  fill: black;
+}
+
+.svg-icon-black circle {
+  stroke: black;
+  stroke-width: 1;
+}
