@@ -6,7 +6,9 @@ import Cart from './components/cart';
 import Checkout from './components/checkout';
 import Category from './components/category';
 import Layout from './components/layout';
-import { Home } from './components/home';
+import Home from './components/home';
+import OrderConfirmation from './components/orderConfirmation';
+import SearchResults from './components/searchResult';
 
 import {
   BrowserRouter,
@@ -33,6 +35,8 @@ function App() {
           <Route index element={<Home/>} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path='orderconfirmation' element={ <OrderConfirmation /> } />
+          <Route path='search' element={ <SearchResults/> } />
           <Route path="categories/:categoryId/products/:productId" element={<ProductDetail />} />
           <Route path="categories/:categoryId" element={<Category />} />
         </Route>

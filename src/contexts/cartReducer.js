@@ -1,45 +1,69 @@
+const Storage = (cartItems) => {
+  localStorage.setItem('cart', JSON.stringify(cartItems));
+}
+
 export const CartReducer = (state, action) => {
   let index = -1;
 
-  if (action.payload)
-       index = state.cartItems.findIndex( x => x.id === action.payload.id);
+  if (action.payload) {
+    index = state.cartItems.findIndex((x) => x.id === action.payload.id);
+  }
 
-  switch (action.type){
-       case "ADD":
-       case "INCQTY":
+  switch (action.type) {
+    case "ADD":
+    case "INCQTY":
+      if (index === -1) {
+        const updatedCartItemsAdd = [...state.cartItems, { ...action.payload, quantity: 1 }];
+        Storage(updatedCartItemsAdd);
+        return {
+          ...state,
+          cartItems: updatedCartItemsAdd,
+        };
+      } else {
+        const updatedCartItemsIncQty = state.cartItems.map((item, i) =>
+          i === index ? { ...item, quantity: item.quantity + 1 } : item
+        );
+        Storage(updatedCartItemsIncQty);
+        return {
+          ...state,
+          cartItems: updatedCartItemsIncQty,
+        };
+      }
 
-          //console.log('El index aqui es:' + index)
-           if (index === -1){
-               state.cartItems.push({...action.payload, quantity: 1});
-               //console.log("Estoy en el if que agrega cantidad y demas elementos de payload");
-           } else {
-               state.cartItems[index].quantity++;
-               //console.log('Estoy en el else que agrega cantidad ++|')
-           }
-             break;
-           
+    case "REMOVE":
+      if (index > -1) {
+        const updatedCartItemsRemove = state.cartItems.filter(
+          (item) => item.id !== action.payload.id
+        );
+        Storage(updatedCartItemsRemove);
+        return {
+          ...state,
+          cartItems: updatedCartItemsRemove,
+        };
+      }
+      break;
 
-       case "REMOVE":
-           if (index > -1) {
-               state.cartItems.splice(index, 1);
-           }
-           break;
+    case "DECQTY":
+      if (index > -1) {
+        const updatedCartItemsDecQty = state.cartItems.map((item, i) =>
+          i === index ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
+        );
+        Storage(updatedCartItemsDecQty);
+        return {
+          ...state,
+          cartItems: updatedCartItemsDecQty,
+        };
+      }
+      break;
 
+    case "CLEAR":
+      Storage([]);
+      return {
+        ...state,
+        cartItems: [],
+      };
 
-       case "DECQTY": 
-           if (index > -1) {
-               state.cartItems[index].quantity--;
-           }
-           break;
-
-       case "CLEAR":
-           state.cartItems = [];
-           break;
-
-       default:
-           
-
-   }
-   
-   return state;
-}
+    default:
+      return state;
+  }
+};

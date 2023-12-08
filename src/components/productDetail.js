@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductsById } from '../fetcher';
 import '../styles/productDetail.css';
+import { CartContext } from '../contexts/cartContext';
 
 const ProductDetail = () => {
+
+  const { addProduct } = useContext(CartContext);
 
   const [product, setProduct] = React.useState({errorMessage: "", data: {} });
   //const [categories, setCategories] = React.useState({errorMessage: "", data: []}); 
@@ -81,7 +84,8 @@ const ProductDetail = () => {
             </div>
 
             <div className='category-product-action'>
-                <button>Añadir a Carrito</button>
+              {/* onClick={ () => addProduct({idProd, titleProd, priceProd}) } */}
+                <button >Añadir a Carrito</button>
             </div>
         </aside>
         <div className='product-info-description'>{product.data?.description}</div>

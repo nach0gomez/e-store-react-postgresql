@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../styles/cart.css';
 import { CartContext } from '../contexts/cartContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,14 +7,16 @@ import { PlusIcon, MinusIcon, TrashIcon } from './icons';
 const Cart = () => {
   const navigate = useNavigate();
   const { getItems, clearCart, increaseQuantity, decreaseQuantity, removeProduct } = useContext(CartContext);
-  
+
   // Use local state to manage cartItems for automatic updates
   const [cartItems, setCartItems] = useState(getItems());
 
-  // Function to update the local state and trigger a re-render
-  const updateCartState = () => {
+  // Subscribe to changes in the CartContext
+  useEffect(() => {
     setCartItems(getItems());
-  };
+    //console.log('Cart Items Updated:', getItems);
+
+  }, [getItems]);
 
   const renderCart = () => {
     if (cartItems.length > 0) {
@@ -25,9 +27,9 @@ const Cart = () => {
           </div>
           <div className='cart-qty'>
             {p.quantity}
-            <PlusIcon width={20} onClick={() => { increaseQuantity({ id: p.id }); updateCartState(); }} />
-            <MinusIcon width={20} onClick={() => { decreaseQuantity({ id: p.id }); updateCartState(); }} />
-            <TrashIcon width={20} onClick={() => { removeProduct({ id: p.id }); updateCartState(); }} />
+            <PlusIcon width={20} onClick={() => { increaseQuantity({ id: p.id }); }} />
+            <MinusIcon width={20} onClick={() => { decreaseQuantity({ id: p.id }); }} />
+            <TrashIcon width={20} onClick={() => { removeProduct({ id: p.id }); }} />
           </div>
           <div className='cart-price'>{p.price} COP</div>
         </React.Fragment>
@@ -58,7 +60,7 @@ const Cart = () => {
         <div className='cart-header'>{renderCart()}</div>
         <hr className='cart-header-line' />
       </div>
-      <button className='cart-button' onClick={() => { clearCart(); updateCartState(); }}>
+      <button className='cart-button' onClick={() => { clearCart(); }}>
         Limpiar
       </button>
       <h2 className='cart-total'>Total: {renderTotal()} COP</h2>

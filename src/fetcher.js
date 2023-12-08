@@ -28,9 +28,11 @@ export const getCategories = () => {
     return fetcher("/categorias");
 };
 
-export const getAllProducts = () => {
-    return fetcher("/productos")
-};
+export const getAllProducts = async () => {
+    return fetcher('/productos');
+    
+  };
+
 
 export const getProducts = id => {
     return fetcher("/productos?catId="+id);
@@ -51,3 +53,7 @@ export const getProductsById = async (id) => {
         return { errorMessage: 'Error fetching product details.' };
       }
 };
+
+export const getProductsByQuery = query => {
+    return fetcher('/productos?q=' + query);
+}
