@@ -5,6 +5,7 @@ const OrderConfirmation = () => {
     <div>
         <div>OrderConfirmation</div>
         <p>Gracias por poner su order, fue puesta con exito</p>
+
     </div>
   )
 }
