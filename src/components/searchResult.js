@@ -2,7 +2,7 @@ import React from 'react';
 import { getProductsByQuery } from '../fetcher';
 import { useSearchParams } from 'react-router-dom';
 import CategoryProduct from './categoryProduct';
-
+//import { useNavigate } from 'react-router-dom';
 
 const SearchResults = () => {
 
@@ -30,6 +30,7 @@ const SearchResults = () => {
       <CategoryProduct key={p.id} {...p}>{p.title}</CategoryProduct>);
     } else {
       return <div><p>No hay resultados para la busqueda.</p></div>;
+
     }
   };
 

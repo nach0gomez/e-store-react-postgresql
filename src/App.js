@@ -38,6 +38,7 @@ function App() {
           <Route path='orderconfirmation' element={ <OrderConfirmation /> } />
           <Route path='search' element={ <SearchResults/> } />
           <Route path="categories/:categoryId/products/:productId" element={<ProductDetail />} />
+          <Route path="products/:productId" element={<ProductDetail />} />
           <Route path="categories/:categoryId" element={<Category />} />
         </Route>
       </Routes>
