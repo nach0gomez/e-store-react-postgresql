@@ -10,13 +10,15 @@ const Cart = () => {
 
   // Use local state to manage cartItems for automatic updates
   const [cartItems, setCartItems] = useState(getItems());
-
+  
   // Subscribe to changes in the CartContext
   useEffect(() => {
     setCartItems(getItems());
     //console.log('Cart Items Updated:', getItems);
 
   }, [getItems]);
+
+  //console.log('Cart Items:', cartItems)
 
   const renderCart = () => {
     if (cartItems.length > 0) {

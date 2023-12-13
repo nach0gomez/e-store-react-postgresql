@@ -20,7 +20,7 @@ const ProductDetail = () => {
   
       // Log the original and updated image paths
       //console.log('Before setting state - Original image path:', responseObject.data.image);
-  
+      //console.log(responseObject);
       setProduct(responseObject);
   
       // Log the image path after setting state
@@ -84,8 +84,17 @@ const ProductDetail = () => {
             </div>
 
             <div className='category-product-action'>
-              {/* onClick={ () => addProduct({idProd, titleProd, priceProd}) } */}
-                <button >Añadir a Carrito</button>
+              
+                <button onClick={ () =>{
+                  addProduct({
+                    id: product.data.id,
+                    title: product.data.title,
+                    price: product.data.price, 
+                    quantity: 1});
+                  }
+                   }>
+                    Añadir a Carrito
+                </button>
             </div>
         </aside>
         <div className='product-info-description'>{product.data?.description}</div>
