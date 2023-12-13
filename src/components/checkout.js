@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/checkout.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Checkout = () => {
     const [form, setForm] = React.useState({
@@ -37,9 +38,29 @@ const Checkout = () => {
         }
     };
 
-    const handleSubmit = (ev) => {
-        ev.preventDefault();
-        navigate('/orderconfirmation');
+
+    // request a base de datos mysqlite
+    const handleSubmit = async () => {
+        try {
+            console.log(form);
+            // Realiza una solicitud POST para guardar los datos en la base de datos
+            const response = await axios.post('http://localhost:3004/guardar', form, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.status === 200) {
+                console.log('Datos guardados correctamente');
+                navigate('/orderconfirmation'); // Redirige a la página de confirmación
+            } else {
+                console.error('Error al guardar los datos:', response.statusText);
+            }
+            // Redirige a la página de confirmación o realiza otras acciones según sea necesario
+            //navigate('/orderconfirmation');
+        } catch (error) {
+            console.error('Error al guardar los datos:', error.message);
+        }
     };
 
     return (
@@ -146,7 +167,7 @@ const Checkout = () => {
                             ></input>
                         </div>
                         <div>
-                            <button className='confirm-button' type='submit'>
+                            <button className='confirm-button' onClick={handleSubmit} type='button'>
                                 Confirmar Orden
                             </button>
                         </div>
