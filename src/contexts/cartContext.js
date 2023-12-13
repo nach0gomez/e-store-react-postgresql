@@ -5,7 +5,7 @@ export const CartContext = createContext();
 
 const Storage = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
 
-const initialState = { cartItems: Storage}
+const initialState = { cartItems: Storage }
 
 const CartContextProvider = ({children} ) => { 
 

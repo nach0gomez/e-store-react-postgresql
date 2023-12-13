@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../styles/checkout.css';
 import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../contexts/cartContext';
 import axios from 'axios';
 
 const Checkout = () => {
@@ -11,8 +12,28 @@ const Checkout = () => {
         telefono: '',
         direccion: '',
         direccionEnvio: '',
-        copiarDireccion: false,
+
     });
+
+    const initialState = {
+        nombre: '',
+        documento: '',
+        email: '',
+        telefono: '',
+        direccion: '',
+        direccionEnvio: '',
+        copiarDireccion: false,
+    }
+
+    const { getItems, clearCart } = useContext(CartContext);
+
+    const cartItems = getItems();
+
+
+    const renderTotal = () => {
+        const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        return total;
+      };
 
     const navigate = useNavigate();
 
@@ -39,29 +60,85 @@ const Checkout = () => {
     };
 
 
+    const isValidEmail = (email) => {
+        // Expresión regular para validar un correo electrónico
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+    
+    const isValidNumber = (number) => {
+        // Expresión regular para validar un número (solo dígitos)
+        const numberRegex = /^[0-9]+$/;
+        return numberRegex.test(number);
+    };
+
     // request a base de datos mysqlite
     const handleSubmit = async () => {
         try {
-            console.log(form);
-            // Realiza una solicitud POST para guardar los datos en la base de datos
-            const response = await axios.post('http://localhost:3004/guardar', form, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
 
+        // Validar los datos antes de enviar la solicitud
+        if (!isValidEmail(form.email)) {
+            alert('Correo electrónico no válido');
+            console.log('Correo electrónico no válido');
+            return;
+        }
+
+        if (!isValidNumber(form.documento)) {
+            alert('Número de documento no válido');
+            console.error('Número de documento no válido');
+            return;
+        }
+
+        if (!isValidNumber(form.telefono)) {
+            alert('Número de teléfono no válido');
+            console.error('Número de teléfono no válido');
+            return;
+        }
+            
+            const datos = {
+                nombre: form.nombre,
+                documento: form.documento,
+                email: form.email,
+                telefono: form.telefono,
+                direccion: form.direccion,
+                direccionEnvio: form.direccionEnvio,
+                valorTotal: renderTotal()
+            };
+    
+            console.log(datos);
+    
+            // Realiza una solicitud POST para guardar los datos en la base de datos
+            const response = await axios.post('http://localhost:3004/guardar', datos);
+    
             if (response.status === 200) {
                 console.log('Datos guardados correctamente');
+                
+                //clear the cart so the items are empty
+                clearCart();
+                
+                // Después de enviar el formulario, restablece el estado del formulario a los valores iniciales
+                setForm(initialState);
+
+
                 navigate('/orderconfirmation'); // Redirige a la página de confirmación
             } else {
-                console.error('Error al guardar los datos:', response.statusText);
+                console.error('Error al guardar los datos 1:', response.statusText);
             }
-            // Redirige a la página de confirmación o realiza otras acciones según sea necesario
-            //navigate('/orderconfirmation');
         } catch (error) {
-            console.error('Error al guardar los datos:', error.message);
+            if (error.response) {
+                // El servidor respondió con un código de estado fuera del rango 2xx
+                console.error('Error de respuesta:', error.response.data);
+                console.error('Código de estado:', error.response.status);
+            } else if (error.request) {
+                // La solicitud se hizo, pero no se recibió respuesta
+                console.error('Error de solicitud:', error.request);
+            } else {
+                // Algo ocurrió en la configuración de la solicitud que disparó un error
+                console.error('Error:', error.message);
+            }
         }
     };
+    
 
     return (
         <div className='checkout'>

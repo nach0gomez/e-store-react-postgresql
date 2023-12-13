@@ -9,17 +9,7 @@ const port = 3004;
 
 app.use(cors()); // Permite todas las solicitudes desde cualquier origen
 
-// Configuración de CORS con orígenes específicos permitidos
-const allowedOrigins = ['http://localhost:3000']; // dominio frontend 
-app.use(cors({
-    origin: function (origin, callback) {
-        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-}));
+
 
 // Configuración de SQLite y creación de la tabla con nombre ecommerce
 const db = new sqlite3.Database('ecommerce.sqlite');
@@ -30,20 +20,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Ruta para guardar datos
-app.post('/guardar', (req, res) => {
-    console.log('Recibida una solicitud POST en /guardar:', req.body);
-
+app.post('/guardar', async (req, res) => {
     try {
-    const { nombre, documento, email, telefono, direccion } = req.body;
+        console.log('Recibida una solicitud POST en /guardar:', req.body);
 
-    db.run('INSERT INTO ordenes (nombre, documento, email, telefono, direccion) VALUES (?, ?, ?, ?, ?)',
-        [nombre, documento, email, telefono, direccion],
-        (err) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
-            }
-            res.json({ message: 'Datos guardados correctamente' });
-        });
+        const { nombre, documento, email, telefono, direccion, direccionEnvio, valorTotal } = req.body;
+
+        // nos aseguramos de ajustar el nombre de la tabla y los campos según el esquema creado
+        const query = `
+            INSERT INTO ordenes (nombre, documento, email, telefono, direccion, direccionEnvio, valorTotal)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        // Ejecuta la consulta con los datos del formulario
+        await db.run(query, [nombre, documento, email, telefono, direccion, direccionEnvio, valorTotal]);
+
+        res.json({ message: 'Datos guardados correctamente' });
     } catch (error) {
         console.error('Error al procesar la solicitud:', error);
         res.status(500).json({ error: error.message });
