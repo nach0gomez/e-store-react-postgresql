@@ -1,5 +1,7 @@
 const pool = require('./src/utils/db');
 
+
+// Script to Test the database connection
 (async () => {
   try {
     const result = await pool.query('SELECT NOW()');
