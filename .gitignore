@@ -37,3 +37,9 @@ Thumbs.db
 # Ignore lockfiles pnpm workspaces 
 package-lock.json
 yarn.lock
+
+# Ignore .env file with credentials
+.env
+
+# Ignore PostgreSQL local data
+pgdata/
