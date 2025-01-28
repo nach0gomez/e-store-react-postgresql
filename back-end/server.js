@@ -5,9 +5,9 @@ const app = express();
 app.use(express.json()); // Parse JSON bodies
 
 // Example route
-app.get('/users', async (req, res) => {
+app.get('/pokemons', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM users');
+    const result = await pool.query('SELECT * FROM pokemons');
     res.json(result.rows);
   } catch (err) {
     console.error(err);
@@ -18,5 +18,5 @@ app.get('/users', async (req, res) => {
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT} -> http://localhost:${PORT}/`);
 });
