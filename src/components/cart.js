@@ -49,7 +49,7 @@ const Cart = () => {
   return (
     <div className='cart-container'>
       <h2 className='cart-title'>Carrito</h2>
-      <button className='cart-button' onClick={() => navigate('/checkout')}>
+      <button disabled={ cartItems.length > 0 ? false : true } className='cart-button' onClick={() => navigate('/checkout')}>
         Pagar
       </button>
       <div className='cart-table'>
