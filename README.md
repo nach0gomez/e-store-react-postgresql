@@ -8,3 +8,12 @@ DB_PORT=5432
 DB_USER=postgres
 DB_PASSWORD=password
 DB_NAME=database
+
+
+todo list:
+- create .env.example
+- explain why migrations are not created
+- explain future role implementation
+- order confirmation database implementation
+- upload dumb.sql for recovery and simple usage
+- explain future update and insertion of new products and categories from interface
