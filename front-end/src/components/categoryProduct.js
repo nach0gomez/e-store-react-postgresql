@@ -1,6 +1,4 @@
 import React, { useContext } from 'react'
-// link to navigate to an specific id depending on the element
-// useNavigate to force the navigation when loading info from an specific element
 import { Link, useNavigate } from 'react-router-dom'
 import '../App.css'
 import { CartContext } from '../contexts/cartContext'
@@ -29,8 +27,6 @@ const CategoryProduct = ({ id, title, image, specs, features, price, stock }) =>
           </div>
         )}
 
-        {/* If the element has capacity on specs, it renders the capacity, if not, just passes
-            if capacity loads any data (returns true), then it renders the div */}
         {specs.capacity && (
           <div className='category-product-info-capacity'>
             <h3>Capacidad</h3>

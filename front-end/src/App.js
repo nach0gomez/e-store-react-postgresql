@@ -17,13 +17,21 @@ import {
 } from 'react-router-dom'
 
 function App () {
-  const [categories, setCategories] = useState({ errorMessage: '', data: [] })
+  const [categories, setCategories] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
-      const responseObject1 = await getCategories()
-      setCategories(responseObject1)
+      try {
+        const categories = await getCategories()
+
+        if (categories.length > 0) {
+          setCategories(categories)
+        }
+      } catch (error) {
+        setCategories({ errorMessage: 'Error al obtener categorías', data: [] })
+      }
     }
+
     fetchData()
   }, [])
 

@@ -7,17 +7,15 @@ const Home = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      try {
-        const response = await getProducts()
-
-        if (!response.errorMessage) {
-          setProducts(response.data)
-        } else {
-          console.error('Error fetching all products:', response.errorMessage)
+      const response = await getProducts()
+      // Create a new variable to hold the fixed features
+      const updatedProducts = response.map((product) => {
+        return {
+          ...product,
+          features: product.features.split(', ') // Convert string to array
         }
-      } catch (error) {
-        console.error('Error fetching all products:', error.message)
-      }
+      })
+      setProducts(updatedProducts)
     }
 
     fetchProducts()
@@ -28,7 +26,7 @@ const Home = () => {
       <h1>Products</h1>
       <div>
         {products.map((product) => (
-          <CategoryProduct key={product.id} {...product} />
+          <CategoryProduct key={product.id_product} {...product} />
         ))}
       </div>
     </div>

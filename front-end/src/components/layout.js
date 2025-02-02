@@ -5,10 +5,12 @@ import { HomeIcon, ShoppingCartIcon } from './icons'
 import Search from './search'
 
 const Layout = ({ categories }) => {
+  console.log(categories)
+
   // render the categories, this is done when the page loads for first time
   const renderCategories = () => {
-    return categories.data.map(c =>
-      <li className='categories' key={c.id}> <Link to={`/categories/${c.id}`}> {c.title}  </Link> </li>
+    return categories.map(c =>
+      <li className='categories' key={c.id_category}> <Link to={`/categories/${c.id}`}> {c.title}  </Link> </li>
     )
   }
 
@@ -29,9 +31,10 @@ const Layout = ({ categories }) => {
 
       <section>
         <nav>
+          Categories
           {categories.errorMessage && <div>Error: {categories.errorMessage}</div>}
           <ul>
-            {categories.data && renderCategories()}
+            {categories && renderCategories()}
           </ul>
         </nav>
 
