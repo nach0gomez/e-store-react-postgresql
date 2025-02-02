@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('./src/utils/db');
-const { categoriesRoutes } = require('./src/routes/categoryRoutes');
-const { productRoutes } = require('./src/routes/productRoutes');
+const categoriesRoutes  = require('./src/routes/categoryRoutes');
+const productRoutes = require('./src/routes/productRoutes');
 const app = express();
 
 app.use(express.json()); // Parse JSON bodies

@@ -10,4 +10,6 @@ const getProducts = async (req, res) => {
   }
 };
 
-module.exports = { getCategories };
+
+
+module.exports = { getProducts };
