@@ -28,10 +28,9 @@ function App () {
           setCategories(categories)
         }
       } catch (error) {
-        setCategories({ errorMessage: 'Error al obtener categorías', data: [] })
+        setCategories({ errorMessage: 'Error fetching all categories' })
       }
     }
-
     fetchData()
   }, [])
 
