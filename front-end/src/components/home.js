@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CategoryProduct from './categoryProduct' // Adjust the path based on your file structure
-import { getAllProducts } from '../fetcher'
+import { getAllProducts } from '../api/fetcher'
 
 const Home = () => {
   const [products, setProducts] = useState([])
