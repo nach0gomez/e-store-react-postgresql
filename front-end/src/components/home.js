@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CategoryProduct from './categoryProduct' // Adjust the path based on your file structure
-import { getAllProducts } from '../api/fetcher'
+import { getAllProducts } from '../api/axiosInstance'
 
 const Home = () => {
   const [products, setProducts] = useState([])
@@ -11,7 +11,6 @@ const Home = () => {
         const response = await getAllProducts()
 
         if (!response.errorMessage) {
-          // Assuming response.data is an array of products
           setProducts(response.data)
         } else {
           console.error('Error fetching all products:', response.errorMessage)
