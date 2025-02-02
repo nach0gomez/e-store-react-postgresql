@@ -1,5 +1,5 @@
 import React from 'react'
-import { getProductsByQuery } from '../fetcher'
+import { getProductsByQuery } from '../api/productsApi'
 import { useSearchParams } from 'react-router-dom'
 import CategoryProduct from './categoryProduct'
 // import { useNavigate } from 'react-router-dom';

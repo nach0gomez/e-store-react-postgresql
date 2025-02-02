@@ -2,9 +2,13 @@ const express = require('express');
 const pool = require('./src/utils/db');
 const categoriesRoutes  = require('./src/routes/categoryRoutes');
 const productRoutes = require('./src/routes/productRoutes');
+const cors = require('cors');
 const app = express();
 
 app.use(express.json()); // Parse JSON bodies
+
+// allowing CORS
+app.use(cors());
 
 // Example route
 app.get('/pokemons', async (req, res) => {

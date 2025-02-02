@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
-import { getCategories } from './fetcher'
+import { getCategories } from './api/categoriesApi'
 import ProductDetail from './components/productDetail'
 import Cart from './components/cart'
 import Checkout from './components/checkout'

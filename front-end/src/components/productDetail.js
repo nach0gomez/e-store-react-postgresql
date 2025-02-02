@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { getProductsById } from '../fetcher'
+import { getProductsById } from '../api/productsApi'
 import '../styles/productDetail.css'
 import { CartContext } from '../contexts/cartContext'
 

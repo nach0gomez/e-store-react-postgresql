@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CategoryProduct from './categoryProduct' // Adjust the path based on your file structure
-import { getAllProducts } from '../api/axiosInstance'
+import { getProducts } from '../api/productsApi'
 
 const Home = () => {
   const [products, setProducts] = useState([])
@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await getAllProducts()
+        const response = await getProducts()
 
         if (!response.errorMessage) {
           setProducts(response.data)
