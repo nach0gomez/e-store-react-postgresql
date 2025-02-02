@@ -16,4 +16,4 @@ todo list:
 - explain future role implementation
 - order confirmation database implementation
 - upload dumb.sql for recovery and simple usage
-- explain future update and insertion of new products and categories from interface
+- explain future update and insertion of new products and categories from interface 
