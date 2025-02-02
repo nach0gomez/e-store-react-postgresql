@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import CategoryProduct from './categoryProduct'; // Adjust the path based on your file structure
-import { getAllProducts } from '../fetcher';
+import React, { useEffect, useState } from 'react'
+import CategoryProduct from './categoryProduct' // Adjust the path based on your file structure
+import { getAllProducts } from '../fetcher'
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await getAllProducts();
-        
+        const response = await getAllProducts()
+
         if (!response.errorMessage) {
           // Assuming response.data is an array of products
-          setProducts(response.data);
+          setProducts(response.data)
         } else {
-          console.error('Error fetching all products:', response.errorMessage);
+          console.error('Error fetching all products:', response.errorMessage)
         }
       } catch (error) {
-        console.error('Error fetching all products:', error.message);
+        console.error('Error fetching all products:', error.message)
       }
-    };
+    }
 
-    fetchProducts();
-  }, []);
+    fetchProducts()
+  }, [])
 
   return (
     <div>
@@ -33,7 +33,7 @@ const Home = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

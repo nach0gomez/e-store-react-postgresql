@@ -1,69 +1,69 @@
 const Storage = (cartItems) => {
-  localStorage.setItem('cart', JSON.stringify(cartItems));
+  localStorage.setItem('cart', JSON.stringify(cartItems))
 }
 
 export const CartReducer = (state, action) => {
-  let index = -1;
+  let index = -1
 
   if (action.payload) {
-    index = state.cartItems.findIndex((x) => x.id === action.payload.id);
+    index = state.cartItems.findIndex((x) => x.id === action.payload.id)
   }
 
   switch (action.type) {
-    case "ADD":
-    case "INCQTY":
+    case 'ADD':
+    case 'INCQTY':
       if (index === -1) {
-        const updatedCartItemsAdd = [...state.cartItems, { ...action.payload, quantity: 1 }];
-        Storage(updatedCartItemsAdd);
+        const updatedCartItemsAdd = [...state.cartItems, { ...action.payload, quantity: 1 }]
+        Storage(updatedCartItemsAdd)
         return {
           ...state,
-          cartItems: updatedCartItemsAdd,
-        };
+          cartItems: updatedCartItemsAdd
+        }
       } else {
         const updatedCartItemsIncQty = state.cartItems.map((item, i) =>
           i === index ? { ...item, quantity: item.quantity + 1 } : item
-        );
-        Storage(updatedCartItemsIncQty);
+        )
+        Storage(updatedCartItemsIncQty)
         return {
           ...state,
-          cartItems: updatedCartItemsIncQty,
-        };
+          cartItems: updatedCartItemsIncQty
+        }
       }
 
-    case "REMOVE":
+    case 'REMOVE':
       if (index > -1) {
         const updatedCartItemsRemove = state.cartItems.filter(
           (item) => item.id !== action.payload.id
-        );
-        Storage(updatedCartItemsRemove);
+        )
+        Storage(updatedCartItemsRemove)
         return {
           ...state,
-          cartItems: updatedCartItemsRemove,
-        };
+          cartItems: updatedCartItemsRemove
+        }
       }
-      break;
+      break
 
-    case "DECQTY":
+    case 'DECQTY':
       if (index > -1) {
         const updatedCartItemsDecQty = state.cartItems.map((item, i) =>
           i === index ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
-        );
-        Storage(updatedCartItemsDecQty);
+        )
+        Storage(updatedCartItemsDecQty)
         return {
           ...state,
-          cartItems: updatedCartItemsDecQty,
-        };
+          cartItems: updatedCartItemsDecQty
+        }
       }
-      break;
+      break
 
-    case "CLEAR":
-      Storage([]);
+    case 'CLEAR':
+      Storage([])
       return {
         ...state,
-        cartItems: [],
-      };
+        cartItems: []
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}
