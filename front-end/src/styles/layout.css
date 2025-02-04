@@ -177,3 +177,19 @@
         gap: 10px;
     }
 }
+
+
+/* --- MAIN CONTENT --- */
+main {
+    margin-top: 70px; /* Prevents overlap with fixed header */
+    margin-left: 250px; /* Ensures space for sidebar */
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+/* If sidebar is hidden on mobile, adjust */
+@media (max-width: 1024px) {
+    main {
+        margin-left: 0;
+    }
+}
