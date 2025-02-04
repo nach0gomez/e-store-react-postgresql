@@ -9,32 +9,50 @@ const Layout = ({ categories }) => {
 
   return (
     <aside>
-      <header>
-        <div id='headerHomeIcon'>
-          <Link to='/'><HomeIcon width={40} /></Link>
+      {/* Header */}
+      <header className='header'>
+        {/* Toggle button (only visible on small screens) */}
+        <button className='toggle-sidebar' onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          ☰
+        </button>
+
+        {/* Home Icon */}
+        <div className='header-icon'>
+          <Link to='/'>
+            <HomeIcon width={40} />
+          </Link>
         </div>
-        <Search />
-        <div id='headerTitle'>Shopper</div>
-        <div id='headerCartIcon'>
-          <Link to='/cart'><ShoppingCartIcon width={40} /></Link>
+
+        {/* App Title */}
+        <div className='header-title'>Shopper</div>
+
+        {/* Search Bar */}
+        <div className='header-search'>
+          <Search />
+        </div>
+
+        {/* Placeholder Features */}
+        <div className='header-extras'>
+          <span className='header-feature'>🔔</span> {/* Notifications */}
+          <span className='header-feature'>👤</span> {/* User Profile */}
+        </div>
+
+        {/* Cart Icon */}
+        <div className='header-icon'>
+          <Link to='/cart'>
+            <ShoppingCartIcon width={40} />
+          </Link>
         </div>
       </header>
 
-      {/* Botón para abrir/cerrar la barra lateral */}
-      <button className='toggle-sidebar' onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-        ☰
-      </button>
-
       <section>
-        {/* Sidebar colapsable */}
-        <nav className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
+        {/* Sidebar (Always visible on desktops) */}
+        <nav className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
           <h2>Categories</h2>
           <ul>
             {categories.map((c) => (
               <li key={c.id_category} className='categories'>
-                <Link to={`/categories/${c.id}`}>
-                  {c.title}
-                </Link>
+                <Link to={`/categories/${c.id}`}>{c.title}</Link>
               </li>
             ))}
           </ul>

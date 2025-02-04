@@ -12,13 +12,89 @@
     --gradient-to-color: #009ffd;
 }
 
-/* Sidebar Styling */
+/* --- HEADER --- */
+.header {
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(135deg, var(--gradient-from-color), var(--gradient-to-color));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: var(--main-box-shadow);
+}
+
+/* Hide toggle button on larger screens */
+.toggle-sidebar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+    transition: var(--main-transition);
+    display: none; 
+}
+
+.toggle-sidebar:hover {
+    transform: scale(1.2);
+}
+
+/* Header Icons */
+.header-icon {
+    display: flex;
+    align-items: center;
+}
+
+.header-icon a {
+    color: white;
+    transition: var(--main-transition);
+}
+
+.header-icon a:hover {
+    transform: scale(1.1);
+}
+
+/* Search Bar Centering */
+.header-search {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Title */
+.header-title {
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Extra Header Features */
+.header-extras {
+    display: flex;
+    gap: 15px;
+}
+
+.header-feature {
+    font-size: 22px;
+    cursor: pointer;
+    transition: var(--main-transition);
+}
+
+.header-feature:hover {
+    transform: scale(1.2);
+}
+
+/* --- SIDEBAR --- */
 .sidebar {
     width: 250px;
     height: 100vh;
     background: linear-gradient(135deg, var(--gradient-from-color), var(--gradient-to-color));
     padding: 20px;
-    box-shadow: var(--main-box-shadow);
     position: fixed;
     top: 0;
     left: 0;
@@ -26,46 +102,25 @@
     box-shadow: var(--main-box-shadow);
     color: white;
     overflow-y: auto;
+    margin-top: 70px; /* Adjusted for fixed header */
 }
 
+/* Sidebar only collapses on smaller screens */
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
 
+    .sidebar.open {
+        transform: translateX(0);
+    }
 
-/* Estilos del botón ☰ */
-.toggle-sidebar {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: #2a2a72;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 1000;
-    border-radius: var(--main-border-radius);
-    transition: var(--main-transition);
+    .toggle-sidebar {
+        display: block; /* Show toggle button on smaller screens */
+    }
 }
 
-
-.toggle-sidebar:hover {
-    background: #009ffd;
-}
-
-
-
-
-/* Sidebar cerrado (móviles) */
-.sidebar.closed {
-    transform: translateX(-100%);
-}
-
-/* Sidebar abierto */
-.sidebar.open {
-    transform: translateX(0);
-}
-
-
-/* Sidebar Heading */
+/* Sidebar Title */
 .sidebar h2 {
     font-size: 22px;
     text-align: center;
@@ -73,7 +128,7 @@
     color: white;
 }
 
-/* Category List */
+/* Sidebar Links */
 .sidebar ul {
     list-style: none;
     padding: 0;
@@ -92,13 +147,6 @@
     cursor: pointer;
 }
 
-/* Icons inside the list */
-.sidebar li::before {
-    content: "📦"; /* Default icon (box) */
-    margin-right: 10px;
-    font-size: 18px;
-}
-
 /* Hover Effect */
 .sidebar li:hover {
     background-color: var(--main-link-hover-bg-color);
@@ -106,13 +154,7 @@
     transform: translateX(10px);
 }
 
-/* Active Link */
-.sidebar li.active {
-    background-color: rgba(255, 255, 255, 0.2);
-    font-weight: bold;
-}
-
-/* Smooth Transition */
+/* Sidebar Links */
 .sidebar a {
     color: white;
     text-decoration: none;
@@ -121,26 +163,17 @@
     align-items: center;
 }
 
-/* Responsive Sidebar */
+/* --- RESPONSIVE DESIGN --- */
 @media (max-width: 768px) {
-    .toggle-sidebar {
-        display: block;
-    }
-    
-    .sidebar {
-        width: 250px;
-    }
-
-    .sidebar h2 {
+    .header-title {
         font-size: 18px;
     }
-
-    .sidebar li {
-        font-size: 16px;
-        padding: 8px;
+    
+    .header-search {
+        display: none; /* Hide search bar on very small screens */
     }
 
-    .sidebar li::before {
-        font-size: 16px;
+    .header-extras {
+        gap: 10px;
     }
 }
