@@ -1,29 +1,43 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../styles/search.css'
 
 function Search () {
-  const [searchTerm, setSearchTerm] = React.useState('')
-
+  const [searchTerm, setSearchTerm] = useState('')
   const navigate = useNavigate()
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (!searchTerm.trim()) return
+
     const delay = setTimeout(() => {
-      if (searchTerm) {
-        navigate('/search?s=' + searchTerm)
-      }
-    }, 300)
+      navigate('/search?s=' + searchTerm.trim())
+    }, 500)
 
     return () => clearTimeout(delay)
   }, [searchTerm, navigate])
 
-  const handleChange = ev => {
+  const handleChange = (ev) => {
     setSearchTerm(ev.target.value)
   }
+
+  const handleSubmit = (ev) => {
+    ev.preventDefault()
+    if (searchTerm.trim()) {
+      navigate('/search?s=' + searchTerm.trim())
+    }
+  }
+
   return (
-    <div id='search'>
-      <label>Search</label>
-      <input type='text' name='search' onChange={handleChange} />
-    </div>
+    <form id='search' onSubmit={handleSubmit}>
+      <input
+        type='text'
+        name='search'
+        placeholder='Search products...'
+        value={searchTerm}
+        onChange={handleChange}
+      />
+      <button type='submit'>🔍</button>
+    </form>
   )
 }
 

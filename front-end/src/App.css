@@ -32,16 +32,6 @@ header {
   justify-self: end;
 }
 
-#search {
-  display: flex;
-}
-
-#search input {
-  margin-left: 10px;
-  height: 30px;
-  margin-top: 5px;
-  width: 300px;
-}
 
 header a {
   color: white;
