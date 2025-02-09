@@ -14,6 +14,7 @@
 
 /* --- HEADER --- */
 .header {
+    font-size: 35px;
     width: 100%;
     height: 70px;
     background: linear-gradient(135deg, var(--gradient-from-color), var(--gradient-to-color));
@@ -27,7 +28,6 @@
     z-index: 1000;
     box-shadow: var(--main-box-shadow);
 }
-
 
 .toggle-sidebar {
     background: none;
@@ -103,7 +103,7 @@
     top: 0;
     left: 0;
     transition: transform 0.3s ease-in-out;
-    box-shadow: var(--main-box-shadow);
+    /* box-shadow: var(--main-box-shadow); */
     color: white;
     overflow-y: auto;
     margin-top: 70px; /* Adjusted for fixed header */
@@ -200,16 +200,21 @@ main {
     }
 }
 
+
 /* -- FOOTER */
+footer {
+    color: white;
+    text-align: center;
+    padding: 10px;
+    background: linear-gradient(235deg, var(--gradient-from-color), var(--gradient-to-color));
+}
+
 footer a {
     color: white;
     text-decoration: none;
     transition: var(--main-transition);
 }
 
-footer {
-    background: linear-gradient(235deg, var(--gradient-from-color), var(--gradient-to-color));
-}
 
 footer p {
     margin-top: 5px;

@@ -12,10 +12,16 @@ const CategoryProduct = ({ id, title, image, specs, features, price, stock }) =>
       <article>
         <div className='product-image'>
           <img src={`/assets/${image}`} alt={title} />
+          <div className='buttons'>
+            <button className='btn'>❤️</button>
+            <button className='btn'>🛒</button>
+            <button className='btn'>🔍</button>
+          </div>
         </div>
         <section>
-          <div className='product-title'>
-            <Link to={`products/${id}`}> {title} </Link>
+          <div className='product-info'>
+            <p className='title'> <Link to={`products/${id}`}> {title} </Link> </p>
+            <p className='price'> {price}</p>
           </div>
         </section>
       </article>
