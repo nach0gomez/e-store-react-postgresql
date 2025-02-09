@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CategoryProduct from './categoryProduct' // Adjust the path based on your file structure
 import { getProducts } from '../api/productsApi'
+import '../styles/home.css'
 
 const Home = () => {
   const [products, setProducts] = useState([])
@@ -24,7 +25,7 @@ const Home = () => {
   return (
     <div>
       <h1>Products</h1>
-      <div>
+      <div className='products-container'>
         {products.map((product) => (
           <CategoryProduct key={product.id_product} {...product} />
         ))}

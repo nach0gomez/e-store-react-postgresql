@@ -5,7 +5,7 @@
 }
  
  /* Main area */
- main {
+ /* main {
   padding: 20px;
  }
 
@@ -103,44 +103,16 @@ article {
  .category-product-action button:last-child {
   background-color: darkgray;
  }
-
+*/
  /* Responsive layout makes the content stay in top of each other instead of next to them */
- @media (max-width: 600px) {
+ 
+ /* @media (max-width: 600px) {
   section {
     -webkit-flex-direction: column;
     flex-direction: column;
   }
  }
+*/
 
- .svg-icon {
-  width: 1em;
-  height: 1em;
-}
+ 
 
-.svg-icon path,
-.svg-icon polygon,
-.svg-icon rect {
-  fill: white;
-}
-
-.svg-icon circle {
-  stroke: white;
-  stroke-width: 1;
-}
-
- .svg-icon-black {
-  width: 1.3em;
-  height: 1.3em;
-  cursor: pointer;
-}
-
-.svg-icon-black path,
-.svg-icon-black polygon,
-.svg-icon-black rect {
-  fill: black;
-}
-
-.svg-icon-black circle {
-  stroke: black;
-  stroke-width: 1;
-}

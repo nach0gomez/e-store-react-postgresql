@@ -44,20 +44,19 @@ const Layout = ({ categories }) => {
           </Link>
         </div>
       </header>
+      {/* Sidebar (Always visible on desktops) */}
+      <nav className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+        <h2>Categories</h2>
+        <ul>
+          {categories.map((c) => (
+            <li key={c.id_category} className='categories'>
+              <Link to={`/categories/${c.id}`}>{c.title}</Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       <section>
-        {/* Sidebar (Always visible on desktops) */}
-        <nav className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-          <h2>Categories</h2>
-          <ul>
-            {categories.map((c) => (
-              <li key={c.id_category} className='categories'>
-                <Link to={`/categories/${c.id}`}>{c.title}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
         <main>
           <Outlet />
         </main>
