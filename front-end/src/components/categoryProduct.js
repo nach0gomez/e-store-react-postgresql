@@ -3,15 +3,20 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../styles/categoryProduct.css'
 import { CartContext } from '../contexts/cartContext'
 
-const CategoryProduct = ({ id, title, image, specs, features, price, stock }) => {
+const CategoryProduct = ({ idProduct, title, image, specs, features, price, stock }) => {
   const navigate = useNavigate()
-  // const { addProduct } = useContext(CartContext)
+  const { addProduct } = useContext(CartContext)
+
+  const handleClick = () => {
+    navigate(`products/${idProduct}`)
+  }
 
   return (
     <div className='product-container'>
       <article>
         <div className='product-image'>
-          <img src={`/assets/${image}`} alt={title} />
+          {/* onClick={navigate(`products/${id}`)} */}
+          <img src={`/assets/${image}`} onClick={handleClick} alt={title} />
           <div className='buttons'>
             <button className='btn'>❤️</button>
             <button className='btn'>🛒</button>
@@ -20,7 +25,8 @@ const CategoryProduct = ({ id, title, image, specs, features, price, stock }) =>
         </div>
         <section>
           <div className='product-info'>
-            <p className='title'> <Link to={`products/${id}`}> {title} </Link> </p>
+            <p>id:{idProduct}</p>
+            <p className='title'> <Link to={`products/${idProduct}`}> {title} </Link> </p>
             <p className='price'>{price} COP</p>
           </div>
         </section>

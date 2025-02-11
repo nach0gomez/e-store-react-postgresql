@@ -27,7 +27,8 @@ const Home = () => {
       <h1>Products</h1>
       <div className='products-container'>
         {products.map((product) => (
-          <CategoryProduct key={product.id_product} {...product} />
+          // make the prop camel case
+          <CategoryProduct key={product.id_product} idProduct={product.id_product} {...product} />
         ))}
       </div>
     </div>
