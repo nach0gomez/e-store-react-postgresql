@@ -1,3 +1,16 @@
+:root {
+    --main-bg-color: #f8f9fa;
+    --main-text-color: #333;
+    --main-link-color: #007bff;
+    --main-link-hover-color: #fff;
+    --main-link-hover-bg-color: #007bff;
+    --main-border-color: #e3e3e3;
+    --main-border-radius: 0.5rem;
+    --main-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --gradient-from-color: #2a2a72;
+    --gradient-to-color: #009ffd;
+}
+
 .products-container {
     width: 100%;
     display: grid;
@@ -5,4 +18,74 @@
     grid-gap: 20px;
     justify-items: center; /* Centra los productos en el grid */
     padding: 20px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.price {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    width: 100%;
+}
+
+.btn {
+    /* background: rgba(1, 91, 188, 0.85);  */
+    background: rgba(255, 255, 255, 0.394);
+    backdrop-filter: blur(8px); /* glass effect */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+ }
+ 
+ .btn:hover {
+    background: rgba(244, 244, 244, 0.9);
+ }
+ 
+
+.buttons {
+    opacity: 0;
+    display: flex; /* Avoids reflow */
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: opacity 0.35s ease-in-out;
+    pointer-events: none; /* Avoids the buttons to block the hover */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px); /* glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.product-image {
+    position: relative;
+}
+
+.product-image:hover .buttons {
+    opacity: 1; /* Make the buttons visible again */
+    pointer-events: all; /* Allows the user to interact with the buttons  */
 }

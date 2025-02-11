@@ -21,7 +21,7 @@ const CategoryProduct = ({ id, title, image, specs, features, price, stock }) =>
         <section>
           <div className='product-info'>
             <p className='title'> <Link to={`products/${id}`}> {title} </Link> </p>
-            <p className='price'> {price}</p>
+            <p className='price'>{price}</p>
           </div>
         </section>
       </article>
