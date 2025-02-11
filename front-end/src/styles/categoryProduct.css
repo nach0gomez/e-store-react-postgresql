@@ -90,9 +90,19 @@ p .price {
 
 .product-image {
     position: relative;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
 .product-image:hover .buttons {
     opacity: 1; /* Make the buttons visible again */
     pointer-events: all; /* Allows the user to interact with the buttons  */
+}
+
+.product-image:hover {
+    box-shadow: var(--main-box-shadow);
+    filter: brightness(0.92); 
+    transition: filter 0.3s ease-in-out;
 }
