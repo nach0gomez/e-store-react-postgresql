@@ -53,6 +53,10 @@ p .price {
     width: 100%;
 }
 
+.title a {
+    text-decoration: none;
+    color: #333;
+}
 .btn {
     /* background: rgba(1, 91, 188, 0.85);  */
     background: rgba(255, 255, 255, 0.394);
