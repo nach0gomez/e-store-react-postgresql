@@ -15,7 +15,6 @@ const CategoryProduct = ({ idProduct, title, image, specs, features, price, stoc
     <div className='product-container'>
       <article>
         <div className='product-image'>
-          {/* onClick={navigate(`products/${id}`)} */}
           <img src={`/assets/${image}`} onClick={handleClick} alt={title} />
           <div className='buttons'>
             <button className='btn'>❤️</button>
@@ -25,7 +24,6 @@ const CategoryProduct = ({ idProduct, title, image, specs, features, price, stoc
         </div>
         <section>
           <div className='product-info'>
-            <p>id:{idProduct}</p>
             <p className='title'> <Link to={`products/${idProduct}`}> {title} </Link> </p>
             <p className='price'>{price} COP</p>
           </div>
