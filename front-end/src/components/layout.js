@@ -4,6 +4,10 @@ import '../styles/layout.css'
 import { HomeIcon, ShoppingCartIcon } from './icons'
 import Search from './search'
 
+// icons
+import UseAnimations from 'react-useanimations'
+import menu2 from 'react-useanimations/lib/menu2'
+
 const Layout = ({ categories }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
@@ -13,7 +17,7 @@ const Layout = ({ categories }) => {
       <header className='header'>
         {/* Toggle button (only visible on small screens) */}
         <button className='toggle-sidebar' onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-          ☰
+          <UseAnimations animation={menu2} speed={2} strokeColor='white' />
         </button>
 
         {/* Home Icon */}

@@ -34,54 +34,15 @@ const CategoryProduct = ({ idProduct, title, image, specs, features, price, stoc
 
   // return (
   //   <article>
-  //     <div className='category-product-title'>
-  //       <Link to={`products/${id}`}> {title} </Link>
-  //     </div>
-
-  //     <figure>
-  //       <div className='category-product-image-container'>
-  //         <img src={`/assets/${image}`} alt={title} />
-  //       </div>
-  //     </figure>
-  //     <aside>
-
-  //       {specs.dimensions && (
-  //         <div className='category-product-info-dimensions'>
-  //           <h3>Dimensiones</h3>
-  //           <label>{specs.dimensions}</label>
-  //         </div>
-  //       )}
-
-  //       {specs.capacity && (
-  //         <div className='category-product-info-capacity'>
-  //           <h3>Capacidad</h3>
-  //           <label>{specs.capacity}</label>
-  //         </div>
-  //       )}
-
-  //       <div className='category-product-info-features'>
-  //         <h3>Características</h3>
-  //         <ul>
-  //           {features?.map((f, i) => {
-  //             return <li key={`feature${i}`}>{f}</li>
-  //           })}
-  //         </ul>
-  //       </div>
-  //     </aside>
-
-  //     <aside className='category-product-finance'>
-  //       <div className='category-product-finance-price'>
-  //         {price} COP
-  //       </div>
-
-  //       <div className='category-product-info-stock'>
-  //         <label>Unidades Disponibles: {stock}</label>
-  //         <label>Envio GRATIS</label>
-  //       </div>
 
   //       <div className='category-product-action'>
-  //         <button className='clickeable' onClick={() => navigate(`products/${id}`)}>Ver Producto</button>
-  //         <button className='clickeable' onClick={() => addProduct({ id, title, price })}>Añadir a Carrito</button>
+  //         <button className='clickeable'
+  // onClick={() => navigate(`products/${id}`)}>
+  // Ver Producto</button>
+
+  //         <button className='clickeable'
+  //  onClick={() => addProduct({ id, title, price })}>
+  // Añadir a Carrito</button>
   //       </div>
   //     </aside>
   //   </article>

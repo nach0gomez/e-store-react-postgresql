@@ -125,6 +125,7 @@ footer {
     color: white;
     overflow-y: auto;
     margin-top: 70px; /* Adjusted for fixed header */
+    z-index: 999;
 }
 
 /* Sidebar only collapses on smaller screens */
@@ -250,7 +251,7 @@ footer p {
     fill: white;
 }
 
-/* Sidebar Scrollbar (Chrome, Edge, Safari) */
+/* Sidebar Scrollbar (Chrome, Edge, Safari)  */
 
 /* Width of the scrollbar */
 ::-webkit-scrollbar {
