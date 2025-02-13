@@ -33,7 +33,7 @@ const CategoryProduct = ({ idProduct, title, image, specs, features, price, stoc
         <section>
           <div className='product-info'>
             <p className='title'> <Link to={`products/${idProduct}`}> {title} </Link> </p>
-            <p className='price'>{price} COP</p>
+            <p className='price'>$ {price}</p>
           </div>
         </section>
       </article>

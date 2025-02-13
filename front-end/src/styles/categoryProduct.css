@@ -60,7 +60,6 @@ p .price {
 .btn {
     /* background: rgba(1, 91, 188, 0.85);  */
     background: rgba(255, 255, 255, 0.394);
-    backdrop-filter: blur(8px); /* glass effect */
     color: white;
     border: none;
     padding: 8px 12px;
@@ -90,6 +89,11 @@ p .price {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(8px); /* glass effect */
     border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn:hover .icon {
+    transform: scale(1.2); 
+    transition: transform 0.1s ease-in-out;
 }
 
 .product-image {
