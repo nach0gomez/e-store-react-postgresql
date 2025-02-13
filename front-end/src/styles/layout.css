@@ -12,6 +12,24 @@
     --gradient-to-color: #009ffd;
 }
 
+/* Layout distribution configuration  */
+aside {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Makes the container to use the whole screen size */
+}
+
+main {
+    flex: 1; /* use the remaining space */
+    padding: 20px;
+}
+
+footer {
+    /* position: relative; */
+    width: 100%;
+}
+
+
 /* --- HEADER --- */
 .header {
     font-size: 35px;
@@ -226,8 +244,37 @@ footer p {
 .svg-icon {
     width: 1em;
     height: 1em;
-  }
+}
   
   .svg-icon path {
     fill: white;
-  }
+}
+
+/* Sidebar Scrollbar (Chrome, Edge, Safari) */
+
+/* Width of the scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+    background: #0385ffa1; /* Dark blue */
+}
+
+/* Handle (scrolling thumb) */
+::-webkit-scrollbar-thumb {
+    background: #009ffd; /* Light blue */
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #007bff; /* Slightly different blue */
+}
+
+/* Thumb and track color (Firefox) */
+* {
+    scrollbar-color: #009ffd #0385ffa1;
+    scrollbar-width: thin; /* Options: auto, thin, none */
+}
