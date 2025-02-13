@@ -32,31 +32,31 @@ const ProductDetail = () => {
   return (
     <article>
       <div className='category-product-title'>
-        {product.data.title}
+        {product.title}
       </div>
 
       <figure>
         <div className='category-product-detail-image-container'>
           {/* make sure to load the images from the public reference to avoid the program to not find the file */}
-          <img src={`${process.env.PUBLIC_URL}/${product.data.image}`} alt={product.data.title} />
+          <img src={`/assets/${product.image}`} alt={product.title} />
         </div>
       </figure>
       <aside>
-        {product.data.specs && (
+        {product.specs && (
           <>
-            {product.data.specs.dimensions && (
+            {product.specs.dimensions && (
               <div className='category-product-info-dimensions'>
                 <h3>Dimensiones</h3>
-                <label>{product.data.specs.dimensions}</label>
+                <label>{product.specs.dimensions}</label>
               </div>
             )}
 
             {/* If the element has capacity on specs, it renders the capacity, if not, just passes
             if capacity loads any data (returns true), then it renders the div */}
-            {product.data.specs.capacity && (
+            {product.specs.capacity && (
               <div className='category-product-info-capacity'>
                 <h3>Capacidad</h3>
-                <label>{product.data.specs.capacity}</label>
+                <label>{product.specs.capacity}</label>
               </div>
             )}
           </>
@@ -65,20 +65,21 @@ const ProductDetail = () => {
         <div className='category-product-info-features'>
           <h3>Características</h3>
           <ul>
-            {product.data.features?.map((f, i) => {
+            {/* {product.features?.map((f, i) => {
               return <li key={`feature${i}`}>{f}</li>
-            })}
+            })} */}
+            {product.features}
           </ul>
         </div>
       </aside>
 
       <aside className='category-product-finance'>
         <div className='category-product-finance-price'>
-          {product.data.price} COP
+          {product.price} COP
         </div>
 
         <div className='category-product-info-stock'>
-          <label>Unidades Disponibles: {product.data.stock}</label>
+          <label>Unidades Disponibles: {product.stock}</label>
           <label>Envio GRATIS</label>
         </div>
 
@@ -86,9 +87,9 @@ const ProductDetail = () => {
 
           <button onClick={() => {
             addProduct({
-              id: product.data.id,
-              title: product.data.title,
-              price: product.data.price,
+              id: product.id,
+              title: product.title,
+              price: product.price,
               quantity: 1
             })
           }}
@@ -97,7 +98,7 @@ const ProductDetail = () => {
           </button>
         </div>
       </aside>
-      <div className='product-info-description'>{product.data?.description}</div>
+      <div className='product-info-description'>{product?.description}</div>
     </article>
   )
 }
