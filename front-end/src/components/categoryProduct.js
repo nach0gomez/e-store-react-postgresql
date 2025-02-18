@@ -22,7 +22,7 @@ const CategoryProduct = ({ idProduct, title, image, price }) => {
         <div className='product-image'>
           <img src={`/assets/${image}`} onClick={handleClick} alt={title} />
           <div className='buttons'>
-            <button className='btn' onClick={() => addProduct({ idProduct, title, price })}>
+            <button className='btn' onClick={() => addProduct({ id: idProduct, title, price })}>
               <UseAnimations className='icon' animation={plusToX} speed={0} strokeColor='black' />
             </button>
             <button className='btn' onClick={() => navigate(`products/${idProduct}`)}>

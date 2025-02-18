@@ -8,10 +8,12 @@ const Storage = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('
 const initialState = { cartItems: Storage }
 
 const CartContextProvider = ({ children }) => {
-  // console.log('Context Provider Rendering');
+  // console.log('Context Provider Rendering')
   const [state, dispatch] = useReducer(CartReducer, initialState)
 
   const addProduct = payload => {
+    console.log('Add Product:', payload)
+
     dispatch({ type: 'ADD', payload })
   }
 
@@ -45,7 +47,7 @@ const CartContextProvider = ({ children }) => {
     ...state
   }
 
-  // console.log('Context Values:', contextValues);
+  console.log('Context Values:', contextValues)
 
   return (
     <CartContext.Provider value={contextValues}>

@@ -1,5 +1,5 @@
 const Storage = (cartItems) => {
-  localStorage.setItem('cart', JSON.stringify(cartItems))
+  window.localStorage.setItem('cart', JSON.stringify(cartItems))
 }
 
 export const CartReducer = (state, action) => {
@@ -11,7 +11,6 @@ export const CartReducer = (state, action) => {
 
   switch (action.type) {
     case 'ADD':
-    case 'INCQTY':
       if (index === -1) {
         const updatedCartItemsAdd = [...state.cartItems, { ...action.payload, quantity: 1 }]
         Storage(updatedCartItemsAdd)
@@ -20,6 +19,7 @@ export const CartReducer = (state, action) => {
           cartItems: updatedCartItemsAdd
         }
       } else {
+        // Si el producto ya está en el carrito, simplemente aumenta la cantidad
         const updatedCartItemsIncQty = state.cartItems.map((item, i) =>
           i === index ? { ...item, quantity: item.quantity + 1 } : item
         )
@@ -29,6 +29,19 @@ export const CartReducer = (state, action) => {
           cartItems: updatedCartItemsIncQty
         }
       }
+
+    case 'INCQTY':
+      if (index > -1) {
+        const updatedCartItemsIncQty = state.cartItems.map((item, i) =>
+          i === index ? { ...item, quantity: item.quantity + 1 } : item
+        )
+        Storage(updatedCartItemsIncQty)
+        return {
+          ...state,
+          cartItems: updatedCartItemsIncQty
+        }
+      }
+      return state
 
     case 'REMOVE':
       if (index > -1) {
@@ -41,7 +54,7 @@ export const CartReducer = (state, action) => {
           cartItems: updatedCartItemsRemove
         }
       }
-      break
+      return state
 
     case 'DECQTY':
       if (index > -1) {
@@ -54,7 +67,7 @@ export const CartReducer = (state, action) => {
           cartItems: updatedCartItemsDecQty
         }
       }
-      break
+      return state
 
     case 'CLEAR':
       Storage([])

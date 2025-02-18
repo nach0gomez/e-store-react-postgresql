@@ -71,7 +71,7 @@ const ProductDetail = () => {
         <div className='action-buttons'>
           <button
             className='add-to-cart'
-            onClick={() => addProduct({ id: product.id, title: product.title, price: product.price, quantity })}
+            onClick={() => addProduct({ id: product.id_product, title: product.title, price: product.price, quantity })}
           >
             🛒 Add to Cart
           </button>
