@@ -204,10 +204,10 @@ footer {
 
 /* --- MAIN CONTENT --- */
 main {
-    width: 100%;
+    width: calc(100% - 250px); 
     height: 100%;
     margin-top: 70px; /* Prevents overlap with fixed header */
-    margin-left: 250px; /* Ensures space for sidebar */
+    margin-left: 250px;
     padding: 20px;
     transition: margin-left 0.3s ease-in-out;
 }
@@ -215,6 +215,7 @@ main {
 /* If sidebar is hidden on mobile, adjust */
 @media (max-width: 1024px) {
     main {
+        width: 100%;
         margin-left: 0;
     }
 }
