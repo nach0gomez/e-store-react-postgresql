@@ -8,7 +8,7 @@ import UseAnimations from 'react-useanimations'
 import visibility from 'react-useanimations/lib/visibility'
 import plusToX from 'react-useanimations/lib/plusToX'
 
-const CategoryProduct = ({ idProduct, title, image, specs, features, price, stock }) => {
+const CategoryProduct = ({ idProduct, title, image, price }) => {
   const navigate = useNavigate()
   const { addProduct } = useContext(CartContext)
 

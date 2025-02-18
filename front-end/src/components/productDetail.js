@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getProductsById } from '../api/productsApi'
 import '../styles/productDetail.css'
@@ -6,100 +6,69 @@ import { CartContext } from '../contexts/cartContext'
 
 const ProductDetail = () => {
   const { addProduct } = useContext(CartContext)
-
-  const [product, setProduct] = React.useState({ errorMessage: '', data: {} })
-  // const [categories, setCategories] = React.useState({errorMessage: "", data: []});
-
   const { productId } = useParams()
+  const [product, setProduct] = useState({ errorMessage: '', data: {} })
+  const [quantity, setQuantity] = useState(1) // Control de cantidad
+  const [selectedSize, setSelectedSize] = useState('M') // Talla por defecto
 
-  // params product id in the dependency so its executed when productId is loaded
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
-      const responseObject = await getProductsById(productId)
-
-      // Log the original and updated image paths
-      // console.log('Before setting state - Original image path:', responseObject.data.image);
-      // console.log(responseObject);
-      setProduct(responseObject)
-
-      // Log the image path after setting state
-      // console.log('After setting state - Updated image path:', responseObject.data.image);
+      const product = await getProductsById(productId)
+      setProduct(product)
     }
-
     fetchData()
   }, [productId])
 
   return (
-    <article>
-      <div className='category-product-title'>
-        {product.title}
+    <div className='product-container-detail'>
+      {/* 🔹 Imagen Principal */}
+      <div className='product-image-container'>
+        <img src={`/assets/${product.image}`} alt={product.title} />
       </div>
 
-      <figure>
-        <div className='category-product-detail-image-container'>
-          {/* make sure to load the images from the public reference to avoid the program to not find the file */}
-          <img src={`/assets/${product.image}`} alt={product.title} />
-        </div>
-      </figure>
-      <aside>
-        {product.specs && (
-          <>
-            {product.specs.dimensions && (
-              <div className='category-product-info-dimensions'>
-                <h3>Dimensiones</h3>
-                <label>{product.specs.dimensions}</label>
-              </div>
-            )}
+      {/* 🔹 Información del Producto */}
+      <div className='product-details'>
+        <h2>{product.title}</h2>
+        <p className='sku'>SKU: {product.sku || '11253201'}</p>
+        <p className='description'>{product.description}</p>
+        <h3 className='price'>${product.price || '100.00'}</h3>
 
-            {/* If the element has capacity on specs, it renders the capacity, if not, just passes
-            if capacity loads any data (returns true), then it renders the div */}
-            {product.specs.capacity && (
-              <div className='category-product-info-capacity'>
-                <h3>Capacidad</h3>
-                <label>{product.specs.capacity}</label>
-              </div>
-            )}
-          </>
-        )}
-
-        <div className='category-product-info-features'>
-          <h3>Características</h3>
-          <ul>
-            {/* {product.features?.map((f, i) => {
-              return <li key={`feature${i}`}>{f}</li>
-            })} */}
-            {product.features}
-          </ul>
-        </div>
-      </aside>
-
-      <aside className='category-product-finance'>
-        <div className='category-product-finance-price'>
-          {product.price} COP
+        {/* 🔹 Selector de Talla */}
+        <div className='size-selector'>
+          <span>Tamaño:</span>
+          {['XS', 'S', 'M', 'L', 'XL'].map((size) => (
+            <button
+              key={size}
+              className={selectedSize === size ? 'active' : ''}
+              onClick={() => setSelectedSize(size)}
+            >
+              {size}
+            </button>
+          ))}
         </div>
 
-        <div className='category-product-info-stock'>
-          <label>Unidades Disponibles: {product.stock}</label>
-          <label>Envio GRATIS</label>
+        {/* 🔹 Selector de Cantidad */}
+        <div className='quantity-selector'>
+          <span>Cantidad:</span>
+          <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
+          <span>{quantity}</span>
+          <button onClick={() => setQuantity(quantity + 1)}>+</button>
         </div>
 
-        <div className='category-product-action'>
-
-          <button onClick={() => {
-            addProduct({
-              id: product.id,
-              title: product.title,
-              price: product.price,
-              quantity: 1
-            })
-          }}
+        {/* 🔹 Botones de Acción */}
+        <div className='action-buttons'>
+          <button
+            className='add-to-cart'
+            onClick={() => addProduct({ id: product.id, title: product.title, price: product.price, quantity })}
           >
-            Añadir a Carrito
+            🛒 Agregar al Carrito
           </button>
+          <button className='buy-now'>🔥 Comprar Ahora</button>
         </div>
-      </aside>
-      <div className='product-info-description'>{product?.description}</div>
-    </article>
+
+        <p className='safe-checkout'>✅ Compra Segura y Garantizada</p>
+      </div>
+    </div>
   )
 }
 

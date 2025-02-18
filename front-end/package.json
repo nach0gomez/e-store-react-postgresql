@@ -12,6 +12,7 @@
     "pg-hstore": "^2.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-image-magnify": "^2.7.4",
     "react-router-dom": "^7.1.5",
     "react-scripts": "5.0.1",
     "react-useanimations": "^2.10.0",
