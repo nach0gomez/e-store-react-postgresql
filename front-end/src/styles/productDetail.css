@@ -11,6 +11,15 @@
   transition: var(--main-transition);
 }
 
+.product-image-container {
+  width: 380px;
+}
+
+.product-image-container ul {
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
 /* 🔹 Imagen */
 .product-image-container img {
   width: 380px;
@@ -19,7 +28,7 @@
   box-shadow: var(--main-box-shadow);
 }
 
-/* 🔹 Información del producto */
+/* 🔹 Product information */
 .product-details {
   max-width: 500px;
 }
@@ -36,9 +45,21 @@ h2 {
   opacity: 0.7;
 }
 
+.features {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
 .description {
+  margin-top: 10px;
+  display: flex;
   font-size: 16px;
   color: var(--main-text-color);
+  text-decoration: none;
+  list-style-type: none;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
 }
 
 .price {
@@ -47,10 +68,13 @@ h2 {
   font-weight: bold;
 }
 
-/* 🔹 Selector de Tallas */
+/* 🔹 Size selector */
+.size-selector {
+  margin-top: 20px;
+}
+
 .size-selector span {
-  display: block;
-  margin-bottom: 5px;
+  margin: 0px 20px 5px 50px;
   font-weight: bold;
 }
 
@@ -75,7 +99,7 @@ h2 {
 
 /* 🔹 Selector de Cantidad */
 .quantity-selector {
-  margin-top: 15px;
+  margin: 15px 20px 5px 100px;
 }
 
 .quantity-selector span {
@@ -97,9 +121,9 @@ h2 {
   background: var(--gradient-to-color);
 }
 
-/* 🔹 Botones */
+/* 🔹 buttons */
 .action-buttons {
-  margin-top: 20px;
+  margin: 20px 0px 0px 85px;
 }
 
 .add-to-cart,
@@ -130,6 +154,7 @@ h2 {
 
 /* 🔹 Mensaje de Compra Segura */
 .safe-checkout {
+  margin-left: 130px;
   margin-top: 15px;
   font-size: 14px;
   color: var(--main-text-color);

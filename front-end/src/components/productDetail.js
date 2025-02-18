@@ -14,6 +14,8 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       const product = await getProductsById(productId)
+      product.features = product.features.split(',')
+      product.description = product.description.split('\\n\\n')
       setProduct(product)
     }
     fetchData()
@@ -21,21 +23,31 @@ const ProductDetail = () => {
 
   return (
     <div className='product-container-detail'>
-      {/* 🔹 Imagen Principal */}
+      {/* 🔹 Main image */}
       <div className='product-image-container'>
         <img src={`/assets/${product.image}`} alt={product.title} />
+        <h3 className='features'>Features</h3>
+        <ul>
+          {product.features && product.features.map((feature, index) => (
+            <li key={index}>{feature}</li>
+          ))}
+        </ul>
       </div>
 
-      {/* 🔹 Información del Producto */}
+      {/* 🔹 Product information */}
       <div className='product-details'>
         <h2>{product.title}</h2>
         <p className='sku'>SKU: {product.sku || '11253201'}</p>
-        <p className='description'>{product.description}</p>
+        <ul className='description'>
+          {product.description && product.description.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
         <h3 className='price'>${product.price || '100.00'}</h3>
 
-        {/* 🔹 Selector de Talla */}
+        {/* 🔹 Size Selector */}
         <div className='size-selector'>
-          <span>Tamaño:</span>
+          <span>Size:</span>
           {['XS', 'S', 'M', 'L', 'XL'].map((size) => (
             <button
               key={size}
@@ -47,26 +59,26 @@ const ProductDetail = () => {
           ))}
         </div>
 
-        {/* 🔹 Selector de Cantidad */}
+        {/* 🔹 Quantity selector */}
         <div className='quantity-selector'>
-          <span>Cantidad:</span>
+          <span>Quantity:</span>
           <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
           <span>{quantity}</span>
           <button onClick={() => setQuantity(quantity + 1)}>+</button>
         </div>
 
-        {/* 🔹 Botones de Acción */}
+        {/* 🔹 Action buttons */}
         <div className='action-buttons'>
           <button
             className='add-to-cart'
             onClick={() => addProduct({ id: product.id, title: product.title, price: product.price, quantity })}
           >
-            🛒 Agregar al Carrito
+            🛒 Add to Cart
           </button>
-          <button className='buy-now'>🔥 Comprar Ahora</button>
+          <button className='buy-now'>🔥 Buy Now</button>
         </div>
 
-        <p className='safe-checkout'>✅ Compra Segura y Garantizada</p>
+        <p className='safe-checkout'>✅ Guaranteed safe checkout</p>
       </div>
     </div>
   )
