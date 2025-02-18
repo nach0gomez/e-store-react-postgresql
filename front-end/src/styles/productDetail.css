@@ -1,5 +1,6 @@
 .product-container-detail {
   display: flex;
+  box-sizing: border-box;
   align-items: normal;
   justify-content: left;
   gap: 80px;
