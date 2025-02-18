@@ -12,8 +12,6 @@ const CartContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CartReducer, initialState)
 
   const addProduct = payload => {
-    console.log('Add Product:', payload)
-
     dispatch({ type: 'ADD', payload })
   }
 
@@ -46,8 +44,6 @@ const CartContextProvider = ({ children }) => {
     getItems,
     ...state
   }
-
-  console.log('Context Values:', contextValues)
 
   return (
     <CartContext.Provider value={contextValues}>
