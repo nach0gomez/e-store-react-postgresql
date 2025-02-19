@@ -12,8 +12,6 @@
 }
 
 .products-container {
-    justify-content: center;
-    align-items: center;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(272px, 1fr)); 
