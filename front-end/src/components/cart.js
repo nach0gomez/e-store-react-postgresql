@@ -23,20 +23,20 @@ const Cart = () => {
     if (cartItems.length > 0) {
       return cartItems.map((p) => (
         <React.Fragment key={p.id}>
-          <div>
+          <div className='cart-product-title'>
             <Link to={`/categories/3/products/${p.id}`}>{p.title}</Link>
           </div>
           <div className='cart-qty'>
             {p.quantity}
-            <PlusIcon width={20} onClick={() => { increaseQuantity({ id: p.id }) }} />
-            <MinusIcon width={20} onClick={() => { decreaseQuantity({ id: p.id }) }} />
-            <TrashIcon width={20} onClick={() => { removeProduct({ id: p.id }) }} />
+            <PlusIcon className='cart-action' width={20} onClick={() => { increaseQuantity({ id: p.id }) }} />
+            <MinusIcon className='cart-action' width={20} onClick={() => { decreaseQuantity({ id: p.id }) }} />
+            <TrashIcon className='cart-action' width={20} onClick={() => { removeProduct({ id: p.id }) }} />
           </div>
-          <div className='cart-price'>{p.price} COP</div>
+          <div className='cart-price'>${p.price}</div>
         </React.Fragment>
       ))
     } else {
-      return <div>El carrito está vacío.</div>
+      return <div>Cart is empty.</div>
     }
   }
 
@@ -47,24 +47,25 @@ const Cart = () => {
 
   return (
     <div className='cart-container'>
-      <h2 className='cart-title'>Carrito</h2>
-      <button disabled={!(cartItems.length > 0)} className='cart-button' onClick={() => navigate('/checkout')}>
-        Pagar
-      </button>
+      <h2 className='cart-title'>Cart</h2>
+
       <div className='cart-table'>
         <div className='cart-header'>
-          <h4>Artículo</h4>
-          <h4>Cantidad</h4>
-          <h4>Precio</h4>
+          <h3>Product</h3>
+          <h3>Quantity</h3>
+          <h3>Price</h3>
         </div>
         <hr className='cart-header-line' />
         <div className='cart-header'>{renderCart()}</div>
         <hr className='cart-header-line' />
       </div>
       <button className='cart-button' onClick={() => { clearCart() }}>
-        Limpiar
+        Clear
       </button>
-      <h2 className='cart-total'>Total: {renderTotal()} COP</h2>
+      <h2 className='cart-total'>Total: $ {renderTotal()}</h2>
+      <button disabled={!(cartItems.length > 0)} className='cart-button' onClick={() => navigate('/checkout')}>
+        Checkout
+      </button>
     </div>
   )
 }
