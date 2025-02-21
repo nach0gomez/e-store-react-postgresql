@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import '../styles/layout.css'
 import { HomeIcon, ShoppingCartIcon } from './icons'
 import Search from './search'
@@ -10,6 +10,7 @@ import menu2 from 'react-useanimations/lib/menu2'
 
 const Layout = ({ categories }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const Navigate = useNavigate()
 
   return (
     <aside>
@@ -53,8 +54,12 @@ const Layout = ({ categories }) => {
         <h2>Categories</h2>
         <ul>
           {categories.map((c) => (
-            <li key={c.id_category} className='categories'>
-              <Link to={`/categories/${c.id_category}`}>{c.title}</Link>
+            <li
+              key={c.id_category}
+              className='categories'
+              onClick={() => Navigate(`/categories/${c.id_category}`)}
+            >
+              <p>{c.title}</p>
             </li>
           ))}
         </ul>
