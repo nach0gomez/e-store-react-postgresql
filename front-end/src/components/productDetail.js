@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useContext, useState, useEffect } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getProductsById } from '../api/productsApi'
 import '../styles/productDetail.css'
 import { CartContext } from '../contexts/cartContext'
@@ -10,6 +10,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({ errorMessage: '', data: {} })
   const [quantity, setQuantity] = useState(1) // Control de cantidad
   const [selectedSize, setSelectedSize] = useState('M') // Talla por defecto
+  const Navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,7 +76,15 @@ const ProductDetail = () => {
           >
             🛒 Add to Cart
           </button>
-          <button className='buy-now'>🔥 Buy Now</button>
+          <button
+            className='buy-now'
+            onClick={() => {
+              addProduct({ id: product.id_product, title: product.title, price: product.price, quantity })
+              Navigate('/cart')
+            }}
+          >
+            🔥 Buy Now
+          </button>
         </div>
 
         <p className='safe-checkout'>✅ Guaranteed safe checkout</p>
