@@ -18,6 +18,15 @@ export const getProductsById = async (id) => {
   }
 }
 
+export const getProductsByCategory = async (id) => {
+  try {
+    const response = await api.get(`/categories/${id}/products`)
+    return response.data
+  } catch (error) {
+    return error
+  }
+}
+
 export const getProductsByQuery = async (query) => {
   try {
     const response = await api.get(`/products?q=${query}`)

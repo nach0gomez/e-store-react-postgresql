@@ -10,6 +10,7 @@ const getProducts = async (req, res) => {
   }
 };
 
+// Get a product by ID
 const getProductById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -17,6 +18,18 @@ const getProductById = async (req, res) => {
     res.json(result.rows[0]);
   } catch (err) {
     res.status(500).json({ msg:'Server Error Fetching Product', error: err.message });
+  }
+}
+
+
+// Get products by category
+const getProductsByCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query('SELECT * FROM products WHERE id_category = $1', [id]);
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ msg: 'Server Error Fetching Products', error: err.message });
   }
 }
 
@@ -55,4 +68,4 @@ const getFilteredProducts = async (req, res) => {
 };
 
 
-module.exports = { getProducts, getProductById };
+module.exports = { getProducts, getProductById, getProductsByCategory };

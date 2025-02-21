@@ -54,7 +54,7 @@ const Layout = ({ categories }) => {
         <ul>
           {categories.map((c) => (
             <li key={c.id_category} className='categories'>
-              <Link to={`/categories/${c.id}`}>{c.title}</Link>
+              <Link to={`/categories/${c.id_category}`}>{c.title}</Link>
             </li>
           ))}
         </ul>
