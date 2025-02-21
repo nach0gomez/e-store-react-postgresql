@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import '../styles/layout.css'
 import { HomeIcon, ShoppingCartIcon } from './icons'
 import Search from './search'
@@ -10,7 +10,6 @@ import menu2 from 'react-useanimations/lib/menu2'
 
 const Layout = ({ categories }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const Navigate = useNavigate()
 
   return (
     <aside>
@@ -49,18 +48,17 @@ const Layout = ({ categories }) => {
           </Link>
         </div>
       </header>
+
       {/* Sidebar (Always visible on desktops) */}
       <nav className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <h2>Categories</h2>
         <ul>
           {categories.map((c) => (
-            <li
-              key={c.id_category}
-              className='categories'
-              onClick={() => Navigate(`/categories/${c.id_category}`)}
-            >
-              <p>{c.title}</p>
-            </li>
+            <Link key={c.id_category} to={`/categories/${c.id_category}`} style={{ textDecoration: 'none' }}>
+              <li className='categories' style={{ cursor: 'pointer', width: '100%', padding: '10px' }}>
+                <p>{c.title}</p>
+              </li>
+            </Link>
           ))}
         </ul>
       </nav>
