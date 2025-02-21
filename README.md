@@ -24,3 +24,8 @@ Index page
 
 Product Detail
 ![image](https://github.com/user-attachments/assets/dff16ada-a256-40db-9d5f-7b8316553e80)
+
+Cart view
+
+![image](https://github.com/user-attachments/assets/3dd369a0-ab06-4436-b5f2-9da52da81d27)
+
