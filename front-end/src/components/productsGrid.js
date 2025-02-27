@@ -5,8 +5,8 @@ import UseAnimations from 'react-useanimations'
 import loading from 'react-useanimations/lib/loading'
 import useFetchProducts from '../hooks/useFetchProducts'
 
-const ProductsGrid = ({ fetchFunction }) => {
-  const { products, LoadingFlag } = useFetchProducts(fetchFunction)
+const ProductsGrid = ({ fetchFunction, params }) => {
+  const { products, LoadingFlag } = useFetchProducts(fetchFunction, params)
 
   return (
     <div>
