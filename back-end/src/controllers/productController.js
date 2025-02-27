@@ -33,6 +33,17 @@ const getProductsByCategory = async (req, res) => {
   }
 }
 
+// Get products by query
+const getProductsByQuery = async (req, res) => {
+  try {
+    const { query } = req.params;
+    const result = await pool.query('SELECT * FROM products WHERE title ILIKE $1', [`%${query}%`]);
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ msg: 'Server Error Fetching Products', error: err.message });
+  }
+}
+
 
 const getFilteredProducts = async (req, res) => {
   try {
@@ -68,4 +79,4 @@ const getFilteredProducts = async (req, res) => {
 };
 
 
-module.exports = { getProducts, getProductById, getProductsByCategory };
+module.exports = { getProducts, getProductById, getProductsByCategory, getProductsByQuery };

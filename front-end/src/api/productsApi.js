@@ -29,7 +29,7 @@ export const getProductsByCategory = async (id) => {
 
 export const getProductsByQuery = async (query) => {
   try {
-    const response = await api.get(`/products?q=${query}`)
+    const response = await api.get(`/products/search/${query}`)
     return response.data
   } catch (error) {
     return error

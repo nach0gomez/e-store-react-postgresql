@@ -10,8 +10,9 @@ const SearchResults = () => {
     data: []
   })
 
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const query = searchParams.get('s')
+  console.log('query:', query)
 
   React.useEffect(() => {
     const fetchData = async () => {
