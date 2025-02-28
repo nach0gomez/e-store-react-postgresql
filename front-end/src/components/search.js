@@ -1,30 +1,39 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import '../styles/search.css'
 
 function Search () {
   const [searchTerm, setSearchTerm] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
+
+  // Function to handle the search logic
+  const performSearch = () => {
+    const trimmedTerm = searchTerm.trim()
+
+    if (trimmedTerm) {
+      navigate(`/search?s=${trimmedTerm}`)
+    } else if (location.pathname === '/search') {
+      navigate('/')
+    }
+  }
 
   useEffect(() => {
-    // Debounce the search term to avoid making a request on every keystroke
-    // if there is no search, navigate to the main page (all products)
-    const delay = setTimeout(() => {
-      navigate(searchTerm.trim() ? '/search?s=' + searchTerm.trim() : '')
-    }, 500)
+    // Debounce the search term input to avoid rapid navigation
+    const delay = setTimeout(performSearch, 500)
 
-    return () => clearTimeout(delay)
-  }, [searchTerm, navigate])
+    return () => clearTimeout(delay) // Cleanup function to prevent multiple executions
+  }, [searchTerm, navigate, location])
 
+  // Handles input changes
   const handleChange = (ev) => {
     setSearchTerm(ev.target.value)
   }
 
+  // Handles form submission
   const handleSubmit = (ev) => {
     ev.preventDefault()
-    if (searchTerm.trim()) {
-      navigate('/search?s=' + searchTerm.trim())
-    }
+    performSearch()
   }
 
   return (
