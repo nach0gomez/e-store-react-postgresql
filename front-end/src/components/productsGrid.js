@@ -19,11 +19,13 @@ const ProductsGrid = ({ fetchFunction, params }) => {
               <UseAnimations animation={loading} size={40} />
             </div>
             )
-          : (
-              products.map((product) => (
-                <CategoryProduct key={product.id_product} idProduct={product.id_product} {...product} />
-              ))
-            )}
+          : products.length === 0
+            ? <p>No products found with the search provided.</p>
+            : (
+                products.map((product) => (
+                  <CategoryProduct key={product.id_product} idProduct={product.id_product} {...product} />
+                ))
+              )}
       </div>
     </div>
   )

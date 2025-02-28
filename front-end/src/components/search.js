@@ -7,10 +7,10 @@ function Search () {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!searchTerm.trim()) return
-
+    // Debounce the search term to avoid making a request on every keystroke
+    // if there is no search, navigate to the main page (all products)
     const delay = setTimeout(() => {
-      navigate('/search?s=' + searchTerm.trim())
+      navigate(searchTerm.trim() ? '/search?s=' + searchTerm.trim() : '')
     }, 500)
 
     return () => clearTimeout(delay)
