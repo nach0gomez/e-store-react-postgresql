@@ -6,23 +6,22 @@ import axios from 'axios'
 
 const Checkout = () => {
   const [form, setForm] = React.useState({
-    nombre: '',
-    documento: '',
+    fullName: '',
+    document: '',
     email: '',
-    telefono: '',
-    direccion: '',
-    direccionEnvio: ''
-
+    phone: '',
+    address: '',
+    shippingAddress: ''
   })
 
   const initialState = {
-    nombre: '',
-    documento: '',
+    fullName: '',
+    document: '',
     email: '',
-    telefono: '',
-    direccion: '',
-    direccionEnvio: '',
-    copiarDireccion: false
+    phone: '',
+    address: '',
+    shippingAddress: '',
+    copyAddress: false
   }
 
   const { getItems, clearCart } = useContext(CartContext)
@@ -48,199 +47,206 @@ const Checkout = () => {
   }
 
   const handleCopyAddress = () => {
-    if (form.copiarDireccion) {
+    if (form.copyAddress) {
       setForm((prevState) => {
         return {
           ...prevState,
-          direccionEnvio: prevState.direccion
+          shippingAddress: prevState.address
         }
       })
     }
   }
 
   const isValidEmail = (email) => {
-    // Expresión regular para validar un correo electrónico
+    // Regular expression to validate an email address
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return emailRegex.test(email)
   }
 
   const isValidNumber = (number) => {
-    // Expresión regular para validar un número (solo dígitos)
+    // Regular expression to validate a number (digits only)
     const numberRegex = /^[0-9]+$/
     return numberRegex.test(number)
   }
 
-  // request a base de datos mysqlite
+  // Request to SQLite database
   const handleSubmit = async () => {
     try {
-      // Validar los datos antes de enviar la solicitud
+      // Validate data before submitting the request
       if (!isValidEmail(form.email)) {
-        alert('Correo electrónico no válido')
-        console.log('Correo electrónico no válido')
+        alert('Invalid email address')
+        console.log('Invalid email address')
         return
       }
 
-      if (!isValidNumber(form.documento)) {
-        alert('Número de documento no válido')
-        console.error('Número de documento no válido')
+      if (!isValidNumber(form.document)) {
+        alert('Invalid document number')
+        console.error('Invalid document number')
         return
       }
 
-      if (!isValidNumber(form.telefono)) {
-        alert('Número de teléfono no válido')
-        console.error('Número de teléfono no válido')
+      if (!isValidNumber(form.phone)) {
+        alert('Invalid phone number')
+        console.error('Invalid phone number')
         return
       }
 
-      const datos = {
-        nombre: form.nombre,
-        documento: form.documento,
+      const data = {
+        fullName: form.fullName,
+        document: form.document,
         email: form.email,
-        telefono: form.telefono,
-        direccion: form.direccion,
-        direccionEnvio: form.direccionEnvio,
-        valorTotal: renderTotal()
+        phone: form.phone,
+        address: form.address,
+        shippingAddress: form.shippingAddress,
+        totalValue: renderTotal()
       }
 
-      console.log(datos)
+      console.log(data)
 
-      // Realiza una solicitud POST para guardar los datos en la base de datos
-      const response = await axios.post('http://localhost:3004/guardar', datos)
+      // Send a POST request to save the data in the database
+      const response = await axios.post('http://localhost:3004/save', data)
 
       if (response.status === 200) {
-        console.log('Datos guardados correctamente')
+        console.log('Data successfully saved')
 
-        // clear the cart so the items are empty
+        // Clear the cart so the items are empty
         clearCart()
 
-        // Después de enviar el formulario, restablece el estado del formulario a los valores iniciales
+        // After submitting the form, reset the form state to initial values
         setForm(initialState)
 
-        navigate('/orderconfirmation') // Redirige a la página de confirmación
+        navigate('/orderconfirmation') // Redirect to the confirmation page
       } else {
-        console.error('Error al guardar los datos 1:', response.statusText)
+        console.error('Error saving data:', response.statusText)
       }
     } catch (error) {
       if (error.response) {
-        // El servidor respondió con un código de estado fuera del rango 2xx
-        console.error('Error de respuesta:', error.response.data)
-        console.error('Código de estado:', error.response.status)
+        // The server responded with a status code outside the 2xx range
+        console.error('Response error:', error.response.data)
+        console.error('Status code:', error.response.status)
       } else if (error.request) {
-        // La solicitud se hizo, pero no se recibió respuesta
-        console.error('Error de solicitud:', error.request)
+        // The request was made but no response was received
+        console.error('Request error:', error.request)
       } else {
-        // Algo ocurrió en la configuración de la solicitud que disparó un error
+        // Something happened in setting up the request that triggered an error
         console.error('Error:', error.message)
       }
     }
   }
 
+  // TODO: Change to display grid so I can use grid-template-columns or change smth to easier align the form and responsiveness
   return (
     <div className='checkout'>
       <form onSubmit={handleSubmit}>
-        <h2 id='titulo'>Formulario de Compra</h2>
+        <h2 id='title'>Checkout Form</h2>
         <div className='container'>
           <div className='column' id='left-column'>
-            <h4>Informacion Personal</h4>
+            <h4>Personal Information</h4>
             <hr className='hrcheckout' />
             <div className='form-group'>
-              <label className='izq-nombre' htmlFor='nombre'>
-                Nombre Completo
+              <label className='left-label' htmlFor='fullName'>
+                Full Name
               </label>
               <input
                 type='text'
-                id='nombre'
-                name='nombre'
+                id='fullName'
+                name='fullName'
                 onChange={handleChange}
-                placeholder='Ingrese Nombre Completo *'
+                placeholder='Enter Full Name *'
                 required
               />
             </div>
             <div className='form-group'>
-              <label className='izq-nombre' htmlFor='documento'>
-                Numero Documento
+              <label className='left-label' htmlFor='document'>
+                Document Number
               </label>
               <input
                 type='tel'
-                id='documento'
-                name='documento'
+                id='document'
+                name='document'
                 onChange={handleChange}
-                placeholder='Ingrese Documento *'
+                placeholder='Enter Document *'
                 required
               />
             </div>
-            <h4>Informacion Residencial</h4>
+            <h4>Residential Information</h4>
             <hr className='hrcheckout' />
             <div className='form-group'>
-              <label htmlFor='copy'>Copiar dirección a envío</label>
+              <label htmlFor='copy'>Copy address to shipping</label>
               <input
                 type='checkbox'
                 id='copy'
-                name='copiarDireccion'
-                checked={form.copiarDireccion}
+                name='copyAddress'
+                checked={form.copyAddress}
                 onChange={handleChange}
                 onClick={handleCopyAddress}
               />
             </div>
             <div className='form-group'>
-              <label htmlFor='direccion'>Dirección de Residencia Completa</label>
+              <label htmlFor='address'>Full Residential Address</label>
               <input
                 type='text'
-                id='direccion'
-                name='direccion'
-                placeholder='Ingrese Direccion *'
+                id='address'
+                name='address'
+                placeholder='Enter Address *'
                 required
                 onChange={handleChange}
                 onBlur={handleCopyAddress}
               />
             </div>
             <button className='cancel-button checkout' onClick={() => navigate('/cart')}>
-              Cancelar
+              Cancel
             </button>
           </div>
 
           <div className='column' id='right-column'>
+            <div className='hr-right'>
+              <hr />
+            </div>
             <div className='form-group' id='first-item'>
-              <label id='correo' htmlFor='email'>
-                Correo Electrónico
+              <label id='email-label' htmlFor='email'>
+                Email Address
               </label>
               <input
                 type='email'
                 id='email'
                 name='email'
                 onChange={handleChange}
-                placeholder='Ingrese Correo *'
+                placeholder='Enter Email *'
                 required
               />
             </div>
             <div className='form-group'>
-              <label id='tele' htmlFor='telefono'>
-                Teléfono
+              <label id='phone-label' htmlFor='phone'>
+                Phone
               </label>
               <input
                 type='tel'
-                id='telefono'
-                name='telefono'
+                id='phone'
+                name='phone'
                 onChange={handleChange}
-                placeholder='Ingrese Telefono *'
+                placeholder='Enter Phone *'
                 required
               />
             </div>
-            <div className='form-group direccion-envio'>
-              <label htmlFor='direccion-envio'>Dirección de Envío Completa</label>
+            <div className='hr-right'>
+              <hr />
+            </div>
+            <div className='form-group shipping-address'>
+              <label htmlFor='shipping-address'>Full Shipping Address</label>
               <input
                 type='text'
-                id='direccion-envio'
-                name='direccionEnvio'
+                id='shipping-address'
+                name='shippingAddress'
                 onChange={handleChange}
-                placeholder='Ingrese Direccion *'
+                placeholder='Enter Address *'
                 required
-                value={form.direccionEnvio}
+                value={form.shippingAddress}
               />
             </div>
             <div>
               <button className='confirm-button' onClick={handleSubmit} type='button'>
-                Confirmar Orden
+                Confirm Order
               </button>
             </div>
           </div>

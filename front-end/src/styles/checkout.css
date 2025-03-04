@@ -12,7 +12,7 @@ body.checkout {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
-    margin: 20px; /* Añade un margen para separar del borde de la ventana */
+    margin: 20px; /* Adds margin to separate from the window edge */
 }
 
 .column {
@@ -41,12 +41,9 @@ form {
     padding-top: 20px;
 }
 
-
 label {
     margin-bottom: 8px;
 }
-
-
 
 input,
 textarea {
@@ -64,22 +61,24 @@ button.checkout {
     cursor: pointer;
 }
 
-
-#titulo {
+#title {
     padding-left: 25px;
 }
 
+.hr-right {
+    padding-top: 20px;
+}
+
 hr.hrcheckout {
-    position: absolute;
-    width: 75%;
+    /* position: absolute; */
+    width: 90%;
 }
 
 label {
     padding-right: 10px;
 }
 
-#nombre {
-    
+#fullName {
     width: 250px;
 }
 
@@ -91,23 +90,23 @@ label {
     width: 270px;
 }
 
-#direccion {
+#address {
     width: 400px;
 }
 
-.direccion-envio {
+.shipping-address {
     padding-top: 110px;
 }
 
-#direccion-envio{
+#shipping-address {
     width: 400px;
 }
 
-#correo {
+#email-label {
     padding-right: 80px;
 }
 
-.izq-nombre { 
+.left-label { 
     padding-right: 100px;
 }
 
@@ -140,7 +139,7 @@ button {
     cursor: pointer;
 }
 
-#tele {
+#phone-label {
     padding-right: 210px;
     width: 80px;
 }
