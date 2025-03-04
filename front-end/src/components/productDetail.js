@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getProductsById } from '../api/productsApi'
 import '../styles/productDetail.css'
 import { CartContext } from '../contexts/cartContext'

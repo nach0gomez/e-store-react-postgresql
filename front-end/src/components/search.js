@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import '../styles/search.css'
 
@@ -8,7 +8,7 @@ function Search () {
   const location = useLocation()
 
   // Function to handle the search logic
-  const performSearch = () => {
+  const performSearch = useCallback(() => {
     const trimmedTerm = searchTerm.trim()
 
     if (trimmedTerm) {
@@ -16,14 +16,14 @@ function Search () {
     } else if (location.pathname === '/search') {
       navigate('/')
     }
-  }
+  }, [searchTerm, navigate, location]) // Solo se recrea cuando estas dependencias cambian
 
   useEffect(() => {
     // Debounce the search term input to avoid rapid navigation
     const delay = setTimeout(performSearch, 500)
 
     return () => clearTimeout(delay) // Cleanup function to prevent multiple executions
-  }, [searchTerm, navigate, location])
+  }, [searchTerm, navigate, location, performSearch])
 
   // Handles input changes
   const handleChange = (ev) => {
