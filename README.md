@@ -10,6 +10,9 @@ DB_PASSWORD=password
 DB_NAME=database
 
 
+npm start - front
+npm run dev - back
+
 todo list:
 - create .env.example
 - explain why migrations are not created
