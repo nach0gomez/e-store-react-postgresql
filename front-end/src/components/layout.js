@@ -10,6 +10,7 @@ import menu2 from 'react-useanimations/lib/menu2'
 
 const Layout = ({ categories }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
   const Navigate = useNavigate()
 
   return (
@@ -33,7 +34,7 @@ const Layout = ({ categories }) => {
 
         {/* Search Bar */}
         <div className='header-search'>
-          <Search />
+          <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </div>
 
         {/* Placeholder Features */}
@@ -58,7 +59,10 @@ const Layout = ({ categories }) => {
             <li
               key={c.id_category}
               className='categories'
-              onClick={() => Navigate(`/categories/${c.id_category}`)}
+              onClick={() => {
+                setSearchTerm('')
+                Navigate(`/categories/${c.id_category}`)
+              }}
             >
               <p>{c.title}</p> {/* Ensures only the visible text is clickable */}
             </li>

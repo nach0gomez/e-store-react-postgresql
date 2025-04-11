@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import '../styles/search.css'
 
-function Search () {
-  const [searchTerm, setSearchTerm] = useState('')
+function Search ({ searchTerm, setSearchTerm }) {
   const navigate = useNavigate()
   const location = useLocation()
 
